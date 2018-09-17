@@ -1,0 +1,336 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Основы языка Python">
+<meta name="keywords" content="Комментарии,Оператор прсваивания,Оператор умножения,Оператор деления,Оператор возведения в степень,Оператор сложения,Оператор вычитания,Функция,Функция праметры,Функция вызов,Модуль,Векторизация,Переменная,Тип,Объект,Преобразование типов,Преобразование типов автоматическое,Массивы,Массив срез,Операторы логические,Переменная локальная,Переменная глобальная,Аргумент именованный,Аргумент позиционный,Строка документации,doc string,Функция локальная,Функция вложенная,Функция глобальная,Функция родительская,Функция лямбда функция,Функция lambda,Цикл вложенный,Цикл while,Список,Кортеж">
+
+<title>Основы языка Python</title>
+
+<!-- Bootstrap style: bootstrap_FlatUI -->
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_FlatUI.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootstrap_FlatUI */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+<!-- Tools for embedded Bokeh plots -->
+<link rel=stylesheet 
+      href=https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css 
+      type=text/css />
+<script type=text/javascript 
+        src=https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js>
+</script>
+<script type=text/javascript>
+  Bokeh.set_log_level("info");
+</script>
+
+<style>
+.bk-embeded {
+    width: 100%;
+    margin: auto;
+    height: 500px;
+    text-align: webkit-left;
+}
+</style>
+
+
+</head>
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Содержание',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'\u041f\u0435\u0440\u0432\u044b\u0435 \u0448\u0430\u0433\u0438',
+               1,
+               u'python:first-steps',
+               u'python:first-steps'),
+              (u'\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 \u043d\u0430 Python \u0441 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u043c\u0438',
+               2,
+               u'python:first-steps:first-program',
+               u'python:first-steps:first-program'),
+              (u'\u0421\u0446\u0435\u043d\u0430\u0440\u0438\u0439',
+               3,
+               u'python:first-steps:sctrip',
+               u'python:first-steps:sctrip'),
+              (u'\u0420\u0430\u0437\u0431\u043e\u0440 \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u044f',
+               3,
+               u'python:first-steps:dissect',
+               u'python:first-steps:dissect'),
+              (u'\u0417\u0430\u043f\u0443\u0441\u043a \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u0435\u0432 Python',
+               3,
+               u'python:first-steps:start',
+               u'python:first-steps:start'),
+              (u'\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 \u043d\u0430 Python, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u044e\u0449\u0430\u044f \u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u0447\u043d\u044b\u0435 \u0444\u0443\u043d\u043a\u0446\u0438\u0438',
+               2,
+               u'python:first-steps:libs',
+               u'python:first-steps:libs'),
+              (u'\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 \u043d\u0430 Python \u0441 \u0432\u0435\u043a\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0435\u0439 \u0438 \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u0435\u043c \u0433\u0440\u0430\u0444\u0438\u043a\u043e\u0432',
+               2,
+               u'python:first-steps:vect-plot',
+               u'python:first-steps:vect-plot'),
+              (u'\u041d\u0435\u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u043e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043f\u043e\u043d\u044f\u0442\u0438\u044f',
+               2,
+               u'python:first-steps:more-basics',
+               u'python:first-steps:more-basics'),
+              (u'\u0418\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0435 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 Python',
+               3,
+               u'python:first-steps:interavtive',
+               u'python:first-steps:interavtive'),
+              (u'\u0410\u0440\u0438\u0444\u043c\u0435\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0435 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0438, \u043a\u0440\u0443\u0433\u043b\u044b\u0435 \u0441\u043a\u043e\u0431\u043a\u0438 \u0438 \u043e\u0448\u0438\u0431\u043a\u0438 \u043e\u043a\u0440\u0443\u0433\u043b\u0435\u043d\u0438\u044f',
+               3,
+               u'python:first-steps:arithm',
+               u'python:first-steps:arithm'),
+              (u'\u041f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0438 \u043e\u0431\u044a\u0435\u043a\u0442\u044b',
+               3,
+               u'python:first-steps:vars',
+               u'python:first-steps:vars'),
+              (u'\u0426\u0435\u043b\u043e\u0447\u0438\u0441\u043b\u0435\u043d\u043d\u043e\u0435 \u0434\u0435\u043b\u0435\u043d\u0438\u0435',
+               3,
+               u'python:first-steps:int-div',
+               u'python:first-steps:int-div'),
+              (u'\u0424\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0432\u044b\u0432\u043e\u0434 \u0442\u0435\u043a\u0441\u0442\u0430 \u0438 \u0447\u0438\u0441\u0435\u043b',
+               3,
+               u'python:first-steps:format-text',
+               u'python:first-steps:format-text'),
+              (u'\u041c\u0430\u0441\u0441\u0438\u0432\u044b',
+               3,
+               u'python:first-steps:arrays',
+               u'python:first-steps:arrays'),
+              (u'\u041f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u0435 \u0433\u0440\u0430\u0444\u0438\u043a\u043e\u0432',
+               3,
+               u'python:first-steps:plotting',
+               u'python:first-steps:plotting'),
+              (u'\u041c\u0430\u0442\u0440\u0438\u0446\u044b',
+               3,
+               u'python:first-steps:matrix',
+               u'python:first-steps:matrix'),
+              (u'\u0412\u0445\u043e\u0434\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435',
+               3,
+               u'python:first-steps:input-data',
+               u'python:first-steps:input-data'),
+              (u'\u0421\u0438\u043c\u0432\u043e\u043b\u044c\u043d\u044b\u0435 \u0432\u044b\u0447\u0438\u0441\u043b\u0435\u043d\u0438\u044f',
+               3,
+               u'python:first-steps:symb',
+               u'python:first-steps:symb'),
+              (u'\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0438',
+               1,
+               u'python:basic-instr',
+               u'python:basic-instr'),
+              (u'\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f `if`, \u0434\u0432\u043e\u0435\u0442\u043e\u0447\u0438\u0435 \u0438 \u043e\u0442\u0441\u0442\u0443\u043f\u044b',
+               2,
+               u'python:basic-instr:if',
+               u'python:basic-instr:if'),
+              (u'\u0424\u0443\u043d\u043a\u0446\u0438\u0438',
+               2,
+               u'python:basic-instr:funcs',
+               u'python:basic-instr:funcs'),
+              (u'\u0426\u0438\u043a\u043b\u044b',
+               2,
+               u'python:basic-instr:cycles',
+               u'python:basic-instr:cycles'),
+              (u'\u0426\u0438\u043a\u043b `for`',
+               3,
+               u'python:basic-instr:for',
+               u'python:basic-instr:for'),
+              (u'\u0426\u0438\u043a\u043b `while`',
+               3,
+               u'python:basic-instr:while',
+               u'python:basic-instr:while'),
+              (u'\u0421\u043f\u0438\u0441\u043a\u0438 \u0438 \u043a\u043e\u0440\u0442\u0435\u0436\u0438',
+               2,
+               u'python:basic-instr:lists-tuples',
+               u'python:basic-instr:lists-tuples'),
+              (u'\u0421\u043f\u0438\u0441\u043a\u0438',
+               3,
+               u'python:basic-instr:lists',
+               u'python:basic-instr:lists'),
+              (u'\u041a\u043e\u0440\u0442\u0435\u0436\u0438',
+               3,
+               u'python:basic-instr:tuples',
+               u'python:basic-instr:tuples'),
+              (u'\u0427\u0442\u0435\u043d\u0438\u0435 \u0438\u0437 \u0444\u0430\u0439\u043b\u043e\u0432 \u0438 \u0437\u0430\u043f\u0438\u0441\u044c \u0432 \u0444\u0430\u0439\u043b\u044b',
+               2,
+               u'python:basic-instr:file-handle',
+               u'python:basic-instr:file-handle')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="python-FlatUI.html">Основы языка Python</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Содержание</b></a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps" style="font-size: 80%;"><b>Первые шаги</b></a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:first-program" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Программа на Python с переменными</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:sctrip" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Сценарий</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:dissect" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Разбор сценария</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:start" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Запуск сценариев Python</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:libs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Программа на Python, использующая библиотечные функции</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:vect-plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Программа на Python с векторизацией и построением графиков</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:more-basics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Некоторые основные понятия</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:interavtive" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Интерактивное использование Python</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:arithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Арифметические операции, круглые скобки и ошибки округления</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:vars" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Переменные и объекты</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:int-div" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Целочисленное деление</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:format-text" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Форматированный вывод текста и чисел</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Массивы</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:plotting" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Построение графиков</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:matrix" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Матрицы</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:input-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Входные данные</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI001.html#python:first-steps:symb" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Символьные вычисления</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr" style="font-size: 80%;"><b>Основные инструкции</b></a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:if" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Инструкция <code>if</code>, двоеточие и отступы</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:funcs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Функции</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:cycles" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Циклы</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:for" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Цикл <code>for</code></a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:while" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Цикл <code>while</code></a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:lists-tuples" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Списки и кортежи</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Списки</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:tuples" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Кортежи</a></li>
+     <!-- navigation toc: --> <li><a href="._python-FlatUI002.html#python:basic-instr:file-handle" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Чтение из файлов и запись в файлы</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>&#1054;&#1089;&#1085;&#1086;&#1074;&#1099; &#1103;&#1079;&#1099;&#1082;&#1072; Python</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): &#1057;.&#1042;. &#1051;&#1077;&#1084;&#1077;&#1096;&#1077;&#1074;&#1089;&#1082;&#1080;&#1081; -->
+
+<center>
+<b>&#1057;.&#1042;. &#1051;&#1077;&#1084;&#1077;&#1096;&#1077;&#1074;&#1089;&#1082;&#1080;&#1081;</b>  (<tt>sergey.lemeshevsky at gmail.com</tt>)
+</center>
+
+<p>
+<!-- institution -->
+
+<center><b>&#1048;&#1085;&#1089;&#1090;&#1080;&#1090;&#1091;&#1090; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1082;&#1080; &#1053;&#1040;&#1053; &#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1080;</b></center>
+<br>
+<p>
+<center><h4>Sep 17, 2018</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Содержание</h2>
+
+<p>
+<a href="._python-FlatUI001.html#python:first-steps"> &#1055;&#1077;&#1088;&#1074;&#1099;&#1077; &#1096;&#1072;&#1075;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI001.html#python:first-steps:first-program"> &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; Python &#1089; &#1087;&#1077;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1099;&#1084;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI001.html#python:first-steps:libs"> &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; Python, &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1102;&#1097;&#1072;&#1103; &#1073;&#1080;&#1073;&#1083;&#1080;&#1086;&#1090;&#1077;&#1095;&#1085;&#1099;&#1077; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI001.html#python:first-steps:vect-plot"> &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; Python &#1089; &#1074;&#1077;&#1082;&#1090;&#1086;&#1088;&#1080;&#1079;&#1072;&#1094;&#1080;&#1077;&#1081; &#1080; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1077;&#1085;&#1080;&#1077;&#1084; &#1075;&#1088;&#1072;&#1092;&#1080;&#1082;&#1086;&#1074; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI001.html#python:first-steps:more-basics"> &#1053;&#1077;&#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1086;&#1089;&#1085;&#1086;&#1074;&#1085;&#1099;&#1077; &#1087;&#1086;&#1085;&#1103;&#1090;&#1080;&#1103; </a><br>
+<a href="._python-FlatUI002.html#python:basic-instr"> &#1054;&#1089;&#1085;&#1086;&#1074;&#1085;&#1099;&#1077; &#1080;&#1085;&#1089;&#1090;&#1088;&#1091;&#1082;&#1094;&#1080;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI002.html#python:basic-instr:if"> &#1048;&#1085;&#1089;&#1090;&#1088;&#1091;&#1082;&#1094;&#1080;&#1103; <code>if</code>, &#1076;&#1074;&#1086;&#1077;&#1090;&#1086;&#1095;&#1080;&#1077; &#1080; &#1086;&#1090;&#1089;&#1090;&#1091;&#1087;&#1099; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI002.html#python:basic-instr:funcs"> &#1060;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI002.html#python:basic-instr:cycles"> &#1062;&#1080;&#1082;&#1083;&#1099; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI002.html#python:basic-instr:lists-tuples"> &#1057;&#1087;&#1080;&#1089;&#1082;&#1080; &#1080; &#1082;&#1086;&#1088;&#1090;&#1077;&#1078;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._python-FlatUI002.html#python:basic-instr:file-handle"> &#1063;&#1090;&#1077;&#1085;&#1080;&#1077; &#1080;&#1079; &#1092;&#1072;&#1081;&#1083;&#1086;&#1074; &#1080; &#1079;&#1072;&#1087;&#1080;&#1089;&#1100; &#1074; &#1092;&#1072;&#1081;&#1083;&#1099; </a><br>
+</p>
+<p>
+<!-- Common Mako variable and functions -->
+<!-- -<em>- coding: utf-8 -</em>- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="next">
+    <a href="._python-FlatUI001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
