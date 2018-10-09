@@ -14,10 +14,10 @@ def ld(A):
 		v = np.zeros(j+1)
 		v[:j] = LD[j,:j]*LD[range(j),range(j)]
 		v[j] = LD[j,j] - np.dot(LD[j,:j],v[:j])
-		L[j,j] = v[j]
+		LD[j,j] = v[j]
 		LD[j+1:,j] = (LD[j+1:,j] - np.dot(LD[j+1:,:j],v[:j]))/v[j]
 
-	return L
+	return LD
 
 def ld_solve(A, b):
 	"""
@@ -34,15 +34,15 @@ def ld_solve(A, b):
 
 def application():
 	A = np.array([[10, 20, 30], [20, 45, 80], [30, 80, 171]])
-	print A
-	print ld(A)
+	print(A)
+	print(ld(A))
 	x = np.array([1, 1, 1],float)
 	b = np.dot(A,x)
 	x_s = ld_solve(A,b)
 	
-	print "exact = " + str(x)
-	print "solved = " + str(x_s)
-	
+	print("exact = " + str(x))
+	print("solved = " + str(x_s))
+	x
 
 if __name__ == "__main__":
 	application()
