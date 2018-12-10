@@ -9,6 +9,7 @@ Automatically generated HTML file from DocOnce source
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Нелинейные уравнения и системы">
+<meta name="keywords" content="Матрица Якоби,якобиан">
 
 <title>Нелинейные уравнения и системы</title>
 
@@ -74,6 +75,14 @@ code { color: inherit; background-color: transparent; }
                1,
                u'snes:newton',
                u'snes:newton'),
+              (u'\u0420\u0435\u0448\u0435\u043d\u0438\u0435 \u043d\u0435\u043b\u0438\u043d\u0435\u0439\u043d\u044b\u0445 \u0443\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439',
+               2,
+               u'snes:newton:eqs',
+               u'snes:newton:eqs'),
+              (u'\u0420\u0435\u0448\u0435\u043d\u0438\u0435 \u043d\u0435\u043b\u0438\u043d\u0435\u0439\u043d\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c',
+               2,
+               u'snes:newton:sys',
+               u'snes:newton:sys'),
               (u'\u0417\u0430\u0434\u0430\u0447\u0438',
                1,
                u'snes:tasks',
@@ -85,7 +94,11 @@ code { color: inherit; background-color: transparent; }
               (u'Задача 2: \u041c\u0435\u0442\u043e\u0434 \u0441\u0435\u043a\u0443\u0449\u0438\u0445',
                2,
                u'snes:tasks:secant',
-               u'snes:tasks:secant')]}
+               u'snes:tasks:secant'),
+              (u'Задача 3: \u041c\u0435\u0442\u043e\u0434 \u041d\u044c\u044e\u0442\u043e\u043d\u0430 \u0434\u043b\u044f \u0441\u0438\u0441\u0442\u0435\u043c \u0443\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439',
+               2,
+               u'snes:tasks:newton_sys',
+               u'snes:tasks:newton_sys')]}
 end of tocinfo -->
 
 <body>
@@ -125,9 +138,12 @@ MathJax.Hub.Config({
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="._snes-journal001.html#snes:intro" style="font-size: 80%;"><b>Нелинейные системы и уравнения</b></a></li>
      <!-- navigation toc: --> <li><a href="._snes-journal001.html#snes:newton" style="font-size: 80%;"><b>Метод Ньютона</b></a></li>
+     <!-- navigation toc: --> <li><a href="._snes-journal001.html#snes:newton:eqs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Решение нелинейных уравнений</a></li>
+     <!-- navigation toc: --> <li><a href="._snes-journal001.html#snes:newton:sys" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Решение нелинейных систем</a></li>
      <!-- navigation toc: --> <li><a href="._snes-journal002.html#snes:tasks" style="font-size: 80%;"><b>Задачи</b></a></li>
      <!-- navigation toc: --> <li><a href="._snes-journal002.html#snes:tasks:bisection" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 1: Метод бисекций</a></li>
      <!-- navigation toc: --> <li><a href="._snes-journal002.html#snes:tasks:secant" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 2: Метод секущих</a></li>
+     <!-- navigation toc: --> <li><a href="._snes-journal002.html#snes:tasks:newton_sys" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 3: Метод Ньютона для систем уравнений</a></li>
 
         </ul>
       </li>
@@ -161,7 +177,7 @@ MathJax.Hub.Config({
 <center><b>&#1048;&#1085;&#1089;&#1090;&#1080;&#1090;&#1091;&#1090; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1082;&#1080; &#1053;&#1040;&#1053; &#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1080;</b></center>
 <br>
 <p>
-<center><h4>Nov 27, 2018</h4></center> <!-- date -->
+<center><h4>Dec 10, 2018</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -171,9 +187,12 @@ MathJax.Hub.Config({
 <p>
 <a href="._snes-journal001.html#snes:intro"> &#1053;&#1077;&#1083;&#1080;&#1085;&#1077;&#1081;&#1085;&#1099;&#1077; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1099; &#1080; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; </a><br>
 <a href="._snes-journal001.html#snes:newton"> &#1052;&#1077;&#1090;&#1086;&#1076; &#1053;&#1100;&#1102;&#1090;&#1086;&#1085;&#1072; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._snes-journal001.html#snes:newton:eqs"> &#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1085;&#1077;&#1083;&#1080;&#1085;&#1077;&#1081;&#1085;&#1099;&#1093; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1081; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._snes-journal001.html#snes:newton:sys"> &#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1085;&#1077;&#1083;&#1080;&#1085;&#1077;&#1081;&#1085;&#1099;&#1093; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084; </a><br>
 <a href="._snes-journal002.html#snes:tasks"> &#1047;&#1072;&#1076;&#1072;&#1095;&#1080; </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._snes-journal002.html#snes:tasks:bisection"> Задача 1: &#1052;&#1077;&#1090;&#1086;&#1076; &#1073;&#1080;&#1089;&#1077;&#1082;&#1094;&#1080;&#1081; </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._snes-journal002.html#snes:tasks:secant"> Задача 2: &#1052;&#1077;&#1090;&#1086;&#1076; &#1089;&#1077;&#1082;&#1091;&#1097;&#1080;&#1093; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._snes-journal002.html#snes:tasks:newton_sys"> Задача 3: &#1052;&#1077;&#1090;&#1086;&#1076; &#1053;&#1100;&#1102;&#1090;&#1086;&#1085;&#1072; &#1076;&#1083;&#1103; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1081; </a><br>
 </p>
 <p>
 <!-- Common Mako variable and functions -->
