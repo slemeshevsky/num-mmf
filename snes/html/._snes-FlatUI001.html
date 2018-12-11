@@ -365,10 +365,42 @@ f <span style="color: #666666">=</span> lambdify([x],            <span style="co
 dfdx <span style="color: #666666">=</span> lambdify([x], dfdx_expr)
 
 tol <span style="color: #666666">=</span> <span style="color: #666666">1e-1</span>
-sol, its <span style="color: #666666">=</span> Newton(f, dfdx, x<span style="color: #666666">=1.09</span>, eps<span style="color: #666666">=</span>tol)
+sol, no_iterations <span style="color: #666666">=</span> Newton(f, dfdx, x<span style="color: #666666">=1.09</span>, eps<span style="color: #666666">=</span>tol)
 <span style="color: #008000; font-weight: bold">if</span> no_iterations <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
     <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;Уравнение: tanh(x) = 0. Число итераций: {}&quot;</span><span style="color: #666666">.</span>format(no_iterations))
     <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;Решение: {}, eps = {}&quot;</span><span style="color: #666666">.</span>format(sol, tol))
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;Решение не найдено!&quot;</span>)
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">F</span>(x):
+    y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(x)
+    y[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> (<span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>x[<span style="color: #666666">0</span>])<span style="color: #666666">*</span>x[<span style="color: #666666">0</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>x[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> <span style="color: #666666">3</span>
+    y[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>x[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>])<span style="color: #666666">*</span>x[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> x[:<span style="color: #666666">-2</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>x[<span style="color: #666666">2</span>:] <span style="color: #666666">-2</span>
+    y[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>x[<span style="color: #666666">-1</span>])<span style="color: #666666">*</span>x[<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> x[<span style="color: #666666">-2</span>] <span style="color: #666666">-</span> <span style="color: #666666">4</span>
+    <span style="color: #008000; font-weight: bold">return</span> y
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">J</span>(x):
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(x)
+    jac <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((n, n))
+    jac[<span style="color: #666666">0</span>, <span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">4*</span>x[<span style="color: #666666">0</span>]
+    jac[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-2</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>):
+        jac[i, i<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
+        jac[i, i] <span style="color: #666666">=</span> <span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">4*</span>x[i]
+        jac[i, i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-2</span>
+    jac[<span style="color: #666666">-1</span>, <span style="color: #666666">-2</span>] <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
+    jac[<span style="color: #666666">-1</span>, <span style="color: #666666">-1</span>] <span style="color: #666666">=</span> <span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">4*</span>x[<span style="color: #666666">-1</span>]
+
+    <span style="color: #008000; font-weight: bold">return</span> jac
+
+n <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+guess <span style="color: #666666">=</span> <span style="color: #666666">3*</span>np<span style="color: #666666">.</span>ones(n)
+
+sol, its <span style="color: #666666">=</span> Newton_system(F, J, guess)
+
+<span style="color: #008000; font-weight: bold">if</span> its <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;x = {}&quot;</span><span style="color: #666666">.</span>format(sol))
 <span style="color: #008000; font-weight: bold">else</span>:
     <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;Решение не найдено!&quot;</span>)
 </pre></div>

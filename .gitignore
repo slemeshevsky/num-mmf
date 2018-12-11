@@ -2,3 +2,6 @@
 *.old~~
 *~
 /sles/html/src-sles/__pycache__/gauss.cpython-37.pyc
+/snes/html/src-snes/__pycache__/newton.cpython-37.pyc
+/*.pyc
+*.pyc
