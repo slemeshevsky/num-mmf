@@ -78,6 +78,14 @@ code { color: inherit; background-color: transparent; }
                1,
                u'ode:num_meth',
                u'ode:num_meth'),
+              (u'\u042f\u0432\u043d\u044b\u0439 \u043c\u0435\u0442\u043e\u0434 \u042d\u0439\u043b\u0435\u0440\u0430',
+               2,
+               u'ode:num_meth:forward_euler',
+               u'ode:num_meth:forward_euler'),
+              (u'\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u0430\u044f \u0440\u0435\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f \u044f\u0432\u043d\u043e\u0433\u043e \u043c\u0435\u0442\u043e\u0434\u0430 \u042d\u0439\u043b\u0435\u0440\u0430',
+               3,
+               u'ode:num_meth:euler:prog',
+               u'ode:num_meth:euler:prog'),
               (u'\u041c\u0435\u0442\u043e\u0434\u044b \u0420\u0443\u043d\u0433\u0435\u2014\u041a\u0443\u0442\u0442\u0430',
                2,
                u'ode:num_meth:rk',
@@ -86,6 +94,10 @@ code { color: inherit; background-color: transparent; }
                2,
                u'ode:num_meth:adams',
                u'ode:num_meth:adams'),
+              (u'\u0416\u0435\u0441\u0442\u043a\u0438\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u041e\u0414\u0423',
+               2,
+               u'ode:num_meth:stiff',
+               u'ode:num_meth:stiff'),
               (u'\u0417\u0430\u0434\u0430\u0447\u0438',
                1,
                u'ode:tasks',
@@ -97,7 +109,11 @@ code { color: inherit; background-color: transparent; }
               (u'Задача 2: \u041c\u0435\u0442\u043e\u0434 \u043f\u0440\u0435\u0434\u0438\u043a\u0442\u043e\u0440\u2013\u043a\u043e\u0440\u0440\u0435\u043a\u0442\u043e\u0440',
                2,
                u'ode:tasks:prediktor',
-               u'ode:tasks:prediktor')]}
+               u'ode:tasks:prediktor'),
+              (u'Задача 3: \u041c\u0435\u0442\u043e\u0434 \u0413\u0438\u0440\u0430',
+               2,
+               u'ode:tasks:geer',
+               u'ode:tasks:geer')]}
 end of tocinfo -->
 
 <body>
@@ -138,11 +154,15 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Содержание</b></a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:problem" style="font-size: 80%;"><b>Задачи с начальными условиями для систем обыкновенных дифференциальных уравнений</b></a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:num_meth" style="font-size: 80%;"><b>Численные методы решения задачи Коши</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:num_meth:forward_euler" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Явный метод Эйлера</a></li>
+     <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:num_meth:euler:prog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Программная реализация явного метода Эйлера</a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:num_meth:rk" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Методы Рунге—Кутта</a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:num_meth:adams" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Многошаговые методы</a></li>
+     <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:num_meth:stiff" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Жесткие системы ОДУ</a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:tasks" style="font-size: 80%;"><b>Задачи</b></a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:tasks:rk" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 1: Метод Рунге—Кутта</a></li>
      <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:tasks:prediktor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 2: Метод предиктор–корректор</a></li>
+     <!-- navigation toc: --> <li><a href="._ode-journal001.html#ode:tasks:geer" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 3: Метод Гира</a></li>
 
         </ul>
       </li>
@@ -176,7 +196,7 @@ MathJax.Hub.Config({
 <center><b>&#1048;&#1085;&#1089;&#1090;&#1080;&#1090;&#1091;&#1090; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1082;&#1080; &#1053;&#1040;&#1053; &#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1080;</b></center>
 <br>
 <p>
-<center><h4>Dec 10, 2018</h4></center> <!-- date -->
+<center><h4>Mar 19, 2019</h4></center> <!-- date -->
 <br>
 <p>
 <b>Аннотация.</b> &#1042; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1081; &#1087;&#1088;&#1072;&#1082;&#1090;&#1080;&#1082;&#1077; &#1095;&#1072;&#1089;&#1090;&#1086; &#1087;&#1088;&#1080;&#1093;&#1086;&#1076;&#1080;&#1090;&#1089;&#1103; &#1080;&#1084;&#1077;&#1090;&#1100; &#1076;&#1077;&#1083;&#1086; &#1089;
@@ -194,11 +214,14 @@ MathJax.Hub.Config({
 <p>
 <a href="._ode-journal001.html#ode:problem"> &#1047;&#1072;&#1076;&#1072;&#1095;&#1080; &#1089; &#1085;&#1072;&#1095;&#1072;&#1083;&#1100;&#1085;&#1099;&#1084;&#1080; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;&#1084;&#1080; &#1076;&#1083;&#1103; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084; &#1086;&#1073;&#1099;&#1082;&#1085;&#1086;&#1074;&#1077;&#1085;&#1085;&#1099;&#1093; &#1076;&#1080;&#1092;&#1092;&#1077;&#1088;&#1077;&#1085;&#1094;&#1080;&#1072;&#1083;&#1100;&#1085;&#1099;&#1093; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1081; </a><br>
 <a href="._ode-journal001.html#ode:num_meth"> &#1063;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1099;&#1077; &#1084;&#1077;&#1090;&#1086;&#1076;&#1099; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; &#1050;&#1086;&#1096;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:num_meth:forward_euler"> &#1071;&#1074;&#1085;&#1099;&#1081; &#1084;&#1077;&#1090;&#1086;&#1076; &#1069;&#1081;&#1083;&#1077;&#1088;&#1072; </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:num_meth:rk"> &#1052;&#1077;&#1090;&#1086;&#1076;&#1099; &#1056;&#1091;&#1085;&#1075;&#1077;&#8212;&#1050;&#1091;&#1090;&#1090;&#1072; </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:num_meth:adams"> &#1052;&#1085;&#1086;&#1075;&#1086;&#1096;&#1072;&#1075;&#1086;&#1074;&#1099;&#1077; &#1084;&#1077;&#1090;&#1086;&#1076;&#1099; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:num_meth:stiff"> &#1046;&#1077;&#1089;&#1090;&#1082;&#1080;&#1077; &#1089;&#1080;&#1089;&#1090;&#1077;&#1084;&#1099; &#1054;&#1044;&#1059; </a><br>
 <a href="._ode-journal001.html#ode:tasks"> &#1047;&#1072;&#1076;&#1072;&#1095;&#1080; </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:tasks:rk"> Задача 1: &#1052;&#1077;&#1090;&#1086;&#1076; &#1056;&#1091;&#1085;&#1075;&#1077;&#8212;&#1050;&#1091;&#1090;&#1090;&#1072; </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:tasks:prediktor"> Задача 2: &#1052;&#1077;&#1090;&#1086;&#1076; &#1087;&#1088;&#1077;&#1076;&#1080;&#1082;&#1090;&#1086;&#1088;&#8211;&#1082;&#1086;&#1088;&#1088;&#1077;&#1082;&#1090;&#1086;&#1088; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._ode-journal001.html#ode:tasks:geer"> Задача 3: &#1052;&#1077;&#1090;&#1086;&#1076; &#1043;&#1080;&#1088;&#1072; </a><br>
 </p>
 <p>
 <!-- Common Mako variable and functions -->
