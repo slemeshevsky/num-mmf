@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def euler(F, u0, tau, T):
     N_t = int(round(T/tau))
     F_ = lambda t, u: np.asarray(F(t, u))
@@ -14,14 +15,35 @@ def euler(F, u0, tau, T):
 
     return u, t
 
+def backward_euler(F, u0, tau, T):
+    from scipy import optimize
+    N_t = int(round(T/tau))
+    F_ = lambda t, u: np.asarray(F(t, u))
+    t = np.linspace(0, N_t*tau, N_t+1)
+    u = np.zeros((N_t+1, len(u0)))
+    u[0] = np.array(u0)
+
+    def Phi(z, t, v):
+        return z - tau*F_(t, z) - v
+    
+    for n in range(N_t):
+        u[n+1] = optimize.fsolve(Phi, u[n], args=(t[n], u[n]))
+
+    return u, t
+
 def demo_population_growth():
     def F(t, u):
         return 0.1*u
 
     u, t = euler(F=F, u0=[100], tau=0.5, T=20)
-    plt.plot(t, u, t, 100*np.exp(0.1*t))
+    u1, t1 = backward_euler(F=F, u0=[100], tau=0.5, T=20)
+
+    fig = plt.figure()
+    l1, l2, l3 = plt.plot(t, u, t1, u1, t, 100*np.exp(0.1*t))
+    fig.legend((l1, l2, l3), ('Forward Euler', 'Backward Euler', 'Exact'))
     plt.show()
 
+   
 def demo_SIR():
     def F(t, u):
         S, I, R = u
