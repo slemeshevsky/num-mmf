@@ -3,7 +3,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def euler(F, u0, tau, T):
     N_t = int(round(T/tau))
     F_ = lambda t, u: np.asarray(F(t, u))

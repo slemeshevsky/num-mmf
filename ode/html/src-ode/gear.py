@@ -14,13 +14,10 @@ def Gear(F, u0, tau, T):
         u[n+1] = u[n] + tau*F_(t[n], u[n])
 
     def Phi(x, v, t):
-        res = np.zeros(len(x))
-        res = x - tau*F_(t, x)
-        res = res - v
-        return res
+        return x - tau*F_(t, x) - v
 
     for n in range(3, N_t):
-        u[n+1] = optimize.newton(Phi, u[n], args=(u[n], t[n+1]))
+        u[n+1] = optimize.fsolve(Phi, u[n], args=(u[n], t[n+1]))
 
     return u, t
     
