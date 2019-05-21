@@ -1,0 +1,231 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Нестационарные задачи математической физики">
+<meta name="keywords" content="Параболическое уравнение,граничные условия первого рода,граничные условия третьего рода,Гиперболическое уравнение,Разностная схема явная">
+
+<title>Нестационарные задачи математической физики</title>
+
+<!-- Bootstrap style: bootstrap_FlatUI -->
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_FlatUI.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootstrap_FlatUI */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+<!-- Tools for embedded Bokeh plots -->
+<link rel=stylesheet 
+      href=https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css 
+      type=text/css />
+<script type=text/javascript 
+        src=https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js>
+</script>
+<script type=text/javascript>
+  Bokeh.set_log_level("info");
+</script>
+
+<style>
+.bk-embeded {
+    width: 100%;
+    margin: auto;
+    height: 500px;
+    text-align: webkit-left;
+}
+</style>
+
+
+</head>
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Содержание',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'\u0421\u043c\u0435\u0448\u0430\u043d\u043d\u044b\u0435 \u0437\u0430\u0434\u0430\u0447\u0438 \u0434\u043b\u044f \u043d\u0435\u0441\u0442\u0430\u0446\u0438\u043e\u043d\u0430\u0440\u043d\u044b\u0445 \u0443\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439',
+               1,
+               u'time-dep:problem',
+               u'time-dep:problem'),
+              (u'\u0420\u0430\u0437\u043d\u043e\u0441\u0442\u043d\u044b\u0435 \u0441\u0445\u0435\u043c\u044b \u0434\u043b\u044f \u043f\u0430\u0440\u0430\u0431\u043e\u043b\u0438\u0447\u0435\u0441\u043a\u043e\u0433\u043e \u0443\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u044f',
+               1,
+               u'time-dep:num_parab',
+               u'time-dep:num_parab'),
+              (u'\u042f\u0432\u043d\u0430\u044f \u0441\u0445\u0435\u043c\u0430',
+               2,
+               u'time-dep:num_parab:expl',
+               u'time-dep:num_parab:expl'),
+              (u'\u0420\u0435\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f',
+               3,
+               u'time-dep:num_parab:expl:impl',
+               u'time-dep:num_parab:expl:impl'),
+              (u'\u0412\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u044f',
+               3,
+               u'time-dep:num_parab:expl:verif',
+               u'time-dep:num_parab:expl:verif'),
+              (u'\u0427\u0438\u0441\u043b\u0435\u043d\u043d\u044b\u0439 \u044d\u043a\u0441\u043f\u0435\u0440\u0438\u043c\u0435\u043d\u0442',
+               2,
+               u'time-dep:num_parab:exp',
+               u'time-dep:num_parab:exp'),
+              (u'\u0417\u0430\u0434\u0430\u0447\u0438',
+               1,
+               u'time-dep:tasks',
+               u'time-dep:tasks'),
+              (u'Задача 1: \u0417\u0430\u0434\u0430\u0447\u0430 \u0442\u0440\u0435\u0442\u044c\u0435\u0433\u043e \u0440\u043e\u0434\u0430',
+               2,
+               u'time-dep:tasks:1',
+               u'time-dep:tasks:1')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="time-dep-FlatUI.html">Нестационарные задачи математической физики</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Содержание</b></a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:problem" style="font-size: 80%;"><b>Смешанные задачи для нестационарных уравнений</b></a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:num_parab" style="font-size: 80%;"><b>Разностные схемы для параболического уравнения</b></a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:num_parab:expl" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Явная схема</a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:num_parab:expl:impl" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Реализация</a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:num_parab:expl:verif" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Верификация</a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:num_parab:exp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Численный эксперимент</a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:tasks" style="font-size: 80%;"><b>Задачи</b></a></li>
+     <!-- navigation toc: --> <li><a href="._time-dep-FlatUI001.html#time-dep:tasks:1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 1: Задача третьего рода</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>&#1053;&#1077;&#1089;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1072;&#1088;&#1085;&#1099;&#1077; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081; &#1092;&#1080;&#1079;&#1080;&#1082;&#1080;</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): &#1057;.&#1042;. &#1051;&#1077;&#1084;&#1077;&#1096;&#1077;&#1074;&#1089;&#1082;&#1080;&#1081; -->
+
+<center>
+<b>&#1057;.&#1042;. &#1051;&#1077;&#1084;&#1077;&#1096;&#1077;&#1074;&#1089;&#1082;&#1080;&#1081;</b>  (<tt>sergey.lemeshevsky at gmail.com</tt>)
+</center>
+
+<p>
+<!-- institution -->
+
+<center><b>&#1048;&#1085;&#1089;&#1090;&#1080;&#1090;&#1091;&#1090; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1082;&#1080; &#1053;&#1040;&#1053; &#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1080;</b></center>
+<br>
+<p>
+<center><h4>May 21, 2019</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Содержание</h2>
+
+<p>
+<a href="._time-dep-FlatUI001.html#time-dep:problem"> &#1057;&#1084;&#1077;&#1096;&#1072;&#1085;&#1085;&#1099;&#1077; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; &#1076;&#1083;&#1103; &#1085;&#1077;&#1089;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1072;&#1088;&#1085;&#1099;&#1093; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1081;  </a><br>
+<a href="._time-dep-FlatUI001.html#time-dep:num_parab"> &#1056;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1099;&#1077; &#1089;&#1093;&#1077;&#1084;&#1099; &#1076;&#1083;&#1103; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._time-dep-FlatUI001.html#time-dep:num_parab:expl"> &#1071;&#1074;&#1085;&#1072;&#1103; &#1089;&#1093;&#1077;&#1084;&#1072; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._time-dep-FlatUI001.html#time-dep:num_parab:exp"> &#1063;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1099;&#1081; &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090; </a><br>
+<a href="._time-dep-FlatUI001.html#time-dep:tasks"> &#1047;&#1072;&#1076;&#1072;&#1095;&#1080; </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._time-dep-FlatUI001.html#time-dep:tasks:1"> Задача 1: &#1047;&#1072;&#1076;&#1072;&#1095;&#1072; &#1090;&#1088;&#1077;&#1090;&#1100;&#1077;&#1075;&#1086; &#1088;&#1086;&#1076;&#1072; </a><br>
+</p>
+<p>
+<!-- Common Mako variable and functions -->
+<!-- -<em>- coding: utf-8 -</em>- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="next">
+    <a href="._time-dep-FlatUI001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,968 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Нестационарные задачи математической физики">
+<meta name="keywords" content="Параболическое уравнение,граничные условия первого рода,граничные условия третьего рода,Гиперболическое уравнение,Разностная схема явная">
+
+<title>Нестационарные задачи математической физики</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:60px;      /* fixed header height for style bootswatch_journal */
+  margin:-60px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+<!-- Tools for embedded Bokeh plots -->
+<link rel=stylesheet 
+      href=https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css 
+      type=text/css />
+<script type=text/javascript 
+        src=https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js>
+</script>
+<script type=text/javascript>
+  Bokeh.set_log_level("info");
+</script>
+
+<style>
+.bk-embeded {
+    width: 100%;
+    margin: auto;
+    height: 500px;
+    text-align: webkit-left;
+}
+</style>
+
+
+</head>
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Содержание',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'\u0421\u043c\u0435\u0448\u0430\u043d\u043d\u044b\u0435 \u0437\u0430\u0434\u0430\u0447\u0438 \u0434\u043b\u044f \u043d\u0435\u0441\u0442\u0430\u0446\u0438\u043e\u043d\u0430\u0440\u043d\u044b\u0445 \u0443\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439',
+               1,
+               u'time-dep:problem',
+               u'time-dep:problem'),
+              (u'\u0420\u0430\u0437\u043d\u043e\u0441\u0442\u043d\u044b\u0435 \u0441\u0445\u0435\u043c\u044b \u0434\u043b\u044f \u043f\u0430\u0440\u0430\u0431\u043e\u043b\u0438\u0447\u0435\u0441\u043a\u043e\u0433\u043e \u0443\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u044f',
+               1,
+               u'time-dep:num_parab',
+               u'time-dep:num_parab'),
+              (u'\u042f\u0432\u043d\u0430\u044f \u0441\u0445\u0435\u043c\u0430',
+               2,
+               u'time-dep:num_parab:expl',
+               u'time-dep:num_parab:expl'),
+              (u'\u0420\u0435\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f',
+               3,
+               u'time-dep:num_parab:expl:impl',
+               u'time-dep:num_parab:expl:impl'),
+              (u'\u0412\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u044f',
+               3,
+               u'time-dep:num_parab:expl:verif',
+               u'time-dep:num_parab:expl:verif'),
+              (u'\u0427\u0438\u0441\u043b\u0435\u043d\u043d\u044b\u0439 \u044d\u043a\u0441\u043f\u0435\u0440\u0438\u043c\u0435\u043d\u0442',
+               2,
+               u'time-dep:num_parab:exp',
+               u'time-dep:num_parab:exp'),
+              (u'\u0417\u0430\u0434\u0430\u0447\u0438',
+               1,
+               u'time-dep:tasks',
+               u'time-dep:tasks'),
+              (u'Задача 1: \u0417\u0430\u0434\u0430\u0447\u0430 \u0442\u0440\u0435\u0442\u044c\u0435\u0433\u043e \u0440\u043e\u0434\u0430',
+               2,
+               u'time-dep:tasks:1',
+               u'time-dep:tasks:1')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="time-dep-journal.html">Нестационарные задачи математической физики</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._time-dep-journal000.html#table_of_contents" style="font-size: 80%;"><b>Содержание</b></a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:problem" style="font-size: 80%;"><b>Смешанные задачи для нестационарных уравнений</b></a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:num_parab" style="font-size: 80%;"><b>Разностные схемы для параболического уравнения</b></a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:num_parab:expl" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Явная схема</a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:num_parab:expl:impl" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Реализация</a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:num_parab:expl:verif" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Верификация</a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:num_parab:exp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Численный эксперимент</a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:tasks" style="font-size: 80%;"><b>Задачи</b></a></li>
+     <!-- navigation toc: --> <li><a href="#time-dep:tasks:1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Задача 1: Задача третьего рода</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h1 id="time-dep:problem" class="anchor">&#1057;&#1084;&#1077;&#1096;&#1072;&#1085;&#1085;&#1099;&#1077; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; &#1076;&#1083;&#1103; &#1085;&#1077;&#1089;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1072;&#1088;&#1085;&#1099;&#1093; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1081;</h1>
+
+<p>
+&#1054;&#1076;&#1085;&#1080;&#1084; &#1080;&#1079; &#1073;&#1072;&#1079;&#1086;&#1074;&#1099;&#1093; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1081; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081; &#1092;&#1080;&#1079;&#1080;&#1082;&#1080; &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1086;&#1076;&#1085;&#1086;&#1084;&#1077;&#1088;&#1085;&#1086;&#1077;
+&#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1077; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1077; &#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086; &#1087;&#1086;&#1088;&#1103;&#1076;&#1082;&#1072;. &#1042; &#1087;&#1088;&#1103;&#1084;&#1086;&#1091;&#1075;&#1086;&#1083;&#1100;&#1085;&#1080;&#1082;&#1077;
+$$
+\bar{Q}_T = \bar{\Omega} \times [0, T], \quad \bar{\Omega} = \{ x\ : \ 
+0 \leq x \leq l \}
+$$
+
+&#1088;&#1072;&#1089;&#1089;&#1084;&#1072;&#1090;&#1088;&#1080;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1077;
+$$
+\begin{equation}
+\tag{1}
+\frac{\partial u}{\partial t} = \frac{\partial }{\partial x} \left(
+k(x) \frac{\partial u}{\partial x} \right) + f(x,t), \quad x \in
+\Omega,\ t \in (0, T],
+\end{equation}
+$$
+
+&#1076;&#1086;&#1087;&#1086;&#1083;&#1085;&#1077;&#1085;&#1085;&#1086;&#1077; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1084;&#1080; (&#1087;&#1077;&#1088;&#1074;&#1086;&#1075;&#1086; &#1088;&#1086;&#1076;&#1072;)
+$$
+\begin{equation}
+\tag{2}
+u(0, t) = u(l, t) = 0, \quad  t \in (0, T],
+\end{equation}
+$$
+
+&#1080; &#1085;&#1072;&#1095;&#1072;&#1083;&#1100;&#1085;&#1099;&#1084;&#1080;
+$$
+\begin{equation}
+\tag{3}
+u(x, 0) = I(x), \quad 0,\quad x \in \bar\Omega,
+\end{equation}
+$$
+
+&#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;&#1084;&#1080;.
+
+<p>
+&#1044;&#1083;&#1103; &#1087;&#1088;&#1086;&#1089;&#1090;&#1086;&#1090;&#1099; &#1080;&#1079;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1103; &#1084;&#1099; &#1088;&#1072;&#1089;&#1089;&#1084;&#1072;&#1090;&#1088;&#1080;&#1074;&#1072;&#1077;&#1084; &#1087;&#1088;&#1086;&#1089;&#1090;&#1077;&#1081;&#1096;&#1080;&#1077; &#1086;&#1076;&#1085;&#1086;&#1088;&#1086;&#1076;&#1085;&#1099;&#1077;
+&#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1084;&#1080; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103; &#1080; &#1079;&#1072;&#1074;&#1080;&#1089;&#1080;&#1084;&#1086;&#1089;&#1090;&#1100; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; \( k \) &#1090;&#1086;&#1083;&#1100;&#1082;&#1086; &#1086;&#1090;
+&#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1086;&#1081; &#1087;&#1077;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1081;, &#1087;&#1088;&#1080;&#1095;&#1077;&#1084; \( k(x) \geq \kappa > 0 \).
+
+<p>
+&#1042;&#1084;&#1077;&#1089;&#1090;&#1086; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1081; &#1087;&#1077;&#1088;&#1074;&#1086;&#1075;&#1086; &#1088;&#1086;&#1076;&#1072; <a href="#mjx-eqn-1">(1)</a> &#1084;&#1086;&#1075;&#1091;&#1090;
+&#1079;&#1072;&#1076;&#1072;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1076;&#1088;&#1091;&#1075;&#1080;&#1077; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1077; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;. &#1053;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;, &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1077; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;
+&#1090;&#1088;&#1077;&#1090;&#1100;&#1077;&#1075;&#1086; &#1088;&#1086;&#1076;&#1072;: 
+$$
+\begin{align}
+\tag{4}
+-k(0) \pd{u}{x} (0, t) + \sigma_1(t) u(0,t) &= \mu_1(t),\\ 
+\tag{5}
+k(l) \pd{u}{x} (l, t) + \sigma_2(t) u(l,t) &= \mu_2(t), \quad t \in
+(0, T]
+\end{align}
+$$
+
+<p>
+&#1050; &#1085;&#1077;&#1089;&#1090;&#1072;&#1094;&#1080;&#1086;&#1085;&#1072;&#1088;&#1085;&#1099;&#1084; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103;&#1084; &#1084;&#1072;&#1090;&#1077;&#1084;&#1072;&#1090;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081; &#1092;&#1080;&#1079;&#1080;&#1082;&#1080; &#1090;&#1072;&#1082;&#1078;&#1077; &#1086;&#1090;&#1085;&#1086;&#1089;&#1080;&#1090;&#1089;&#1103;
+&#1075;&#1080;&#1087;&#1077;&#1088;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1077; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1077; &#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086; &#1087;&#1086;&#1088;&#1103;&#1076;&#1082;&#1072;. &#1042; &#1086;&#1076;&#1085;&#1086;&#1084;&#1077;&#1088;&#1085;&#1086;&#1084; &#1087;&#1086;
+&#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1091; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1080;&#1097;&#1077;&#1090;&#1089;&#1103; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103;
+$$
+\begin{equation}
+\tag{6}
+\frac{\partial^2 u}{\partial t^2} = \frac{\partial }{\partial x}
+\left( k(x) \frac{\partial u}{\partial x} \right) + f(x,t), \quad x
+\in \Omega, \ t \in (0, T]. 
+\end{equation}
+$$
+
+&#1044;&#1083;&#1103; &#1086;&#1076;&#1085;&#1086;&#1079;&#1085;&#1072;&#1095;&#1085;&#1086;&#1075;&#1086; &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1103; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; &#1087;&#1086;&#1084;&#1080;&#1084;&#1086; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1093;
+&#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1081; <a href="#mjx-eqn-2">(2)</a> &#1079;&#1072;&#1076;&#1072;&#1102;&#1090;&#1089;&#1103; &#1076;&#1074;&#1072; &#1085;&#1072;&#1095;&#1072;&#1083;&#1100;&#1085;&#1099;&#1093; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;
+$$
+\begin{equation}
+\tag{7}
+u(x, 0) = I(x), \quad \frac{\partial u}{\partial t}(x, 0) = V(x),
+\quad x \in \bar\Omega. 
+\end{equation}
+$$
+
+<p>
+<!-- Local Variables: -->
+<!-- doconce-chapter-nickname: "time-dep" -->
+<!-- doconce-section-nickname: "problem" -->
+<!-- End: -->
+
+<h1 id="time-dep:num_parab" class="anchor">&#1056;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1099;&#1077; &#1089;&#1093;&#1077;&#1084;&#1099; &#1076;&#1083;&#1103; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103;</h1>
+
+<h2 id="time-dep:num_parab:expl" class="anchor">&#1071;&#1074;&#1085;&#1072;&#1103; &#1089;&#1093;&#1077;&#1084;&#1072;</h2>
+
+<p>
+&#1055;&#1077;&#1088;&#1074;&#1099;&#1081; &#1096;&#1072;&#1075; &#1087;&#1088;&#1086;&#1094;&#1077;&#1076;&#1091;&#1088;&#1099; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1077;&#1085;&#1080;&#1103; &#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; &#1089;&#1086;&#1089;&#1090;&#1086;&#1080;&#1090; &#1074;
+&#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; &#1086;&#1073;&#1083;&#1072;&#1089;&#1090;&#1080; \( \bar{Q}_T \). &#1041;&#1091;&#1076;&#1077;&#1084; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100; &#1088;&#1072;&#1074;&#1085;&#1086;&#1084;&#1077;&#1088;&#1085;&#1091;&#1102;
+&#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1086;-&#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1091;&#1102; &#1089;&#1077;&#1090;&#1082;&#1091;
+$$
+\bar\omega = \bar{\omega}_h \times \bar{\omega}_\tau, \quad
+\bar{\omega}_h = \{ x_i = i h, \ i = 0, 1, \ldots, N_x \},
+$$
+
+$$
+\bar{\omega}_\tau = \{ t_n = n\tau, \ n = 0, 1, \ldots, N_t \}
+$$
+
+<p>
+&#1044;&#1083;&#1103; &#1072;&#1087;&#1087;&#1088;&#1086;&#1082;&#1089;&#1080;&#1084;&#1072;&#1094;&#1080;&#1080; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; <a href="#mjx-eqn-1">(1)</a>
+&#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1084; &#1103;&#1074;&#1085;&#1091;&#1102; &#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1091;&#1102; &#1089;&#1093;&#1077;&#1084;&#1091;
+$$
+\begin{equation}
+\tag{8}
+\frac{y^{n+1} - y^{n}}{\tau} = - Ay^{n} + \varphi^n, \quad n = 0, 1,
+\ldots, N_t.
+\end{equation}
+$$
+
+&#1047;&#1076;&#1077;&#1089;&#1100; &#1095;&#1077;&#1088;&#1077;&#1079; \( y^n = y_i^n \) &#1086;&#1073;&#1086;&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1086; &#1087;&#1088;&#1080;&#1073;&#1083;&#1080;&#1078;&#1077;&#1085;&#1085;&#1086;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1074; &#1091;&#1079;&#1083;&#1077; &#1089;&#1077;&#1090;&#1082;&#1080;
+\( (x_i, t_n) \in \omega \), &#1089;&#1077;&#1090;&#1086;&#1095;&#1085;&#1099;&#1081; &#1086;&#1087;&#1077;&#1088;&#1072;&#1090;&#1086;&#1088; \( A \) &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085; &#1076;&#1083;&#1103; &#1089;&#1077;&#1090;&#1086;&#1095;&#1085;&#1099;&#1093;
+&#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1081; \( y = 0 \) &#1087;&#1088;&#1080; \( x \in \partial\omega_h \) (&#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1077; &#1091;&#1079;&#1083;&#1099; &#1089;&#1077;&#1090;&#1082;&#1080;
+\( \omega_h \)) &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1084; &#1086;&#1073;&#1088;&#1072;&#1079;&#1086;&#1084;:
+$$
+Ay^n = -(ay_{\bar{x}}^n)_{x,i} = -\frac{1}{h} \left( a_{i+1} \frac{y_{i+1}^n
+- y_i^n}{h} - a_i \frac{y_i^n - y_{i-1}^n}{h} \right), \quad x_i \in
+\omega_h. 
+$$
+
+&#1044;&#1083;&#1103; &#1079;&#1072;&#1076;&#1072;&#1085;&#1080;&#1103; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; \( a \) &#1084;&#1086;&#1078;&#1085;&#1086; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100; &#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1080;&#1103;
+$$
+\begin{align*}
+a_i &= k(x_i - 0.5h), \\ 
+a_i &= 0.5(k(x_i) + k(x_{i-1})),\\ 
+a_i &= \left( \frac{1}{h} \int_{x_{i-1}}^{x_i} \frac{dx}{k(x)} \right)^{-1}.
+\end{align*}
+$$
+
+<p>
+&#1050;&#1083;&#1102;&#1095;&#1077;&#1074;&#1086;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1086; &#1103;&#1074;&#1085;&#1086;&#1081; &#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1099;
+<a href="#mjx-eqn-8">(8)</a> &#1079;&#1072;&#1082;&#1083;&#1102;&#1095;&#1072;&#1077;&#1090;&#1089;&#1103; &#1074; &#1090;&#1086;&#1084;, &#1095;&#1090;&#1086; &#1086;&#1085;&#1072;
+&#1083;&#1077;&#1075;&#1082;&#1086; &#1088;&#1077;&#1096;&#1072;&#1077;&#1090;&#1089;&#1103;. &#1057;&#1095;&#1080;&#1090;&#1072;&#1077;&#1084;, &#1095;&#1090;&#1086; &#1087;&#1088;&#1080;&#1073;&#1083;&#1080;&#1078;&#1077;&#1085;&#1085;&#1086;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; \( y^n \) &#1085;&#1072; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1084;
+&#1089;&#1083;&#1086;&#1077; \( t_n \) &#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1086; &#1076;&#1083;&#1103; &#1074;&#1089;&#1077;&#1093; \( x\in \bar\omega_h \). &#1057;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;,
+&#1085;&#1077;&#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1099;&#1084; &#1074; <a href="#mjx-eqn-8">(8)</a> &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103;
+\( y^{n+1} \) &#1076;&#1083;&#1103; \( x\in\omega_h \). &#1056;&#1077;&#1096;&#1072;&#1103;
+<a href="#mjx-eqn-8">(8)</a> &#1086;&#1090;&#1085;&#1086;&#1089;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086; \( y^{n+1} \) &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1084;
+&#1088;&#1077;&#1082;&#1091;&#1088;&#1088;&#1077;&#1090;&#1085;&#1086;&#1077; &#1089;&#1086;&#1086;&#1090;&#1085;&#1086;&#1096;&#1077;&#1085;&#1080;&#1077;
+$$
+\begin{equation}
+\tag{9}
+y_i^{n+1} = y_i^n + \frac{\tau}{h} \left( a_{i+1} \frac{y_{i+1}^n
+- y_i^n}{h} - a_i \frac{y_i^n - y_{i-1}^n}{h} \right) + \tau
+\varphi_i^n
+\end{equation}
+$$
+
+<p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+  <h3 class="panel-title">Замечание</h3>
+  </div>
+<div class="panel-body">
+<p> <!-- subsequent paragraphs come in larger fonts, so start with a paragraph -->
+&#1042; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1086;&#1075;&#1086; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; \( k(x) = a \) &#1089;&#1086;&#1086;&#1090;&#1085;&#1086;&#1096;&#1077;&#1085;&#1080;&#1077;
+<a href="#mjx-eqn-9">(9)</a> &#1079;&#1072;&#1087;&#1080;&#1096;&#1077;&#1090;&#1089;&#1103; &#1074; &#1074;&#1080;&#1076;&#1077;
+$$
+\begin{equation}
+\tag{10}
+y_i^{n+1} = y_i^n + F \left( y_{i+1}^n - 2y_i^n + y_{i-1} \right) +
+\tau \varphi_i^n.
+\end{equation}
+$$
+
+&#1047;&#1076;&#1077;&#1089;&#1100; &#1074;&#1074;&#1077;&#1076;&#1077;&#1085; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; (<em>&#1089;&#1077;&#1090;&#1086;&#1095;&#1085;&#1086;&#1077; &#1095;&#1080;&#1089;&#1083;&#1086; &#1060;&#1091;&#1088;&#1100;&#1077;</em>)
+$$
+\begin{equation}
+\tag{11}
+F = \frac{a \tau}{h^2}
+\end{equation}
+$$
+</div>
+</div>
+
+
+<p>
+&#1058;&#1072;&#1082;&#1080;&#1084; &#1086;&#1073;&#1088;&#1072;&#1079;&#1086;&#1084;, &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1099;&#1081; &#1072;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084; &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1081;:
+
+<ol>
+<li> &#1042;&#1099;&#1095;&#1080;&#1089;&#1083;&#1103;&#1077;&#1084; \( y_i^0 \) &#1076;&#1083;&#1103; &#1074;&#1089;&#1077;&#1093; \( i = 0, 1, \ldots, N_x \)</li>
+<li> &#1044;&#1083;&#1103; \( n = 1, 2, \ldots, N_t \):
+
+<ol type="a"></li>
+ <li> &#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1103;&#1077;&#1084; <a href="#mjx-eqn-9">(9)</a> &#1076;&#1083;&#1103; &#1074;&#1089;&#1077;&#1093; &#1074;&#1085;&#1091;&#1090;&#1088;&#1077;&#1085;&#1085;&#1080;&#1093; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1099;&#1093; &#1091;&#1079;&#1083;&#1086;&#1074; (\( i = 1, 2, \ldots, N_x - 1 \))</li>
+ <li> &#1091;&#1089;&#1090;&#1072;&#1085;&#1072;&#1074;&#1083;&#1080;&#1074;&#1072;&#1077;&#1084; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103; \( y_i^{n+1} = 0 \) &#1076;&#1083;&#1103; \( i = 0 \) &#1080; \( i = N_x \).</li>
+</ol>
+
+</ol>
+
+<h3 id="time-dep:num_parab:expl:impl" class="anchor">&#1056;&#1077;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103;</h3>
+
+<p>
+&#1060;&#1072;&#1081;&#1083; <a href="src-time-dep/parab1d.py" target="_self">parab1d.py</a> &#1089;&#1086;&#1076;&#1077;&#1088;&#1078;&#1080;&#1090; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102;
+<code>solver_Ex_simple</code> &#1076;&#1083;&#1103; &#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103; &#1086;&#1076;&#1085;&#1086;&#1084;&#1077;&#1088;&#1085;&#1086;&#1075;&#1086; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086;
+&#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; &#1089; &#1086;&#1076;&#1085;&#1086;&#1088;&#1086;&#1076;&#1085;&#1099;&#1084;&#1080; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1084;&#1080; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;&#1084;&#1080; &#1080; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1099;&#1084;
+&#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1086;&#1084; \( k(x) = a \)  &#1087;&#1086; &#1103;&#1074;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1077;:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver_Ex_simple</span>(I, a, f, L, tau, F, T):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Простейшая реализация явной разностной схемы для приближенного решения</span>
+<span style="color: #BA2121; font-style: italic">    параболического уравнения.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    cpu <span style="color: #666666">=</span> <span style="color: #666666">0</span>  <span style="color: #408080; font-style: italic"># Для подсчета процессорного времени</span>
+
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span><span style="color: #008000">float</span>(tau)))
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, Nt<span style="color: #666666">*</span>tau, Nt<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># сетка по времени</span>
+    h <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(a<span style="color: #666666">*</span>tau<span style="color: #666666">/</span>F)
+    Nx <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(L<span style="color: #666666">/</span><span style="color: #008000">float</span>(h)))
+    x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, L, Nx<span style="color: #666666">+1</span>)    <span style="color: #408080; font-style: italic"># сетка по пространству</span>
+
+    <span style="color: #408080; font-style: italic"># Для уверенности шаги по пространству и времени согласуем с сетками</span>
+    h <span style="color: #666666">=</span> x[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> x[<span style="color: #666666">0</span>]
+    tau <span style="color: #666666">=</span> t[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> t[<span style="color: #666666">0</span>]
+
+    u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nx<span style="color: #666666">+1</span>)
+    u_n <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nx<span style="color: #666666">+1</span>)
+
+    <span style="color: #408080; font-style: italic"># устанавливаем начальные условия u(x,0) = I(x)</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nx<span style="color: #666666">+1</span>):
+        u_n[i] <span style="color: #666666">=</span> I(x[i])
+
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, Nt):
+        <span style="color: #408080; font-style: italic"># Вычисляем приближенное решение во внутренних узлах сетки</span>
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, Nx):
+            u[i] <span style="color: #666666">=</span> u_n[i] <span style="color: #666666">+</span> F<span style="color: #666666">*</span>(u_n[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>u_n[i] <span style="color: #666666">+</span> u_n[i<span style="color: #666666">-1</span>]) <span style="color: #666666">+</span> tau<span style="color: #666666">*</span>f(x[i], t[n])
+
+        <span style="color: #408080; font-style: italic"># Задаем граничные условия</span>
+        u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+        u[Nx] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+        <span style="color: #408080; font-style: italic"># Обновляем переменные перед следующим шагом</span>
+        u_n, u <span style="color: #666666">=</span> u, u_n
+
+    cpu <span style="color: #666666">=</span> time<span style="color: #666666">.</span>perf_counter()
+    <span style="color: #008000; font-weight: bold">return</span> u, x, t, cpu
+</pre></div>
+<p>
+&#1044;&#1083;&#1103; &#1091;&#1089;&#1082;&#1086;&#1088;&#1077;&#1085;&#1080;&#1103; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090;&#1072; &#1084;&#1086;&#1078;&#1085;&#1086; &#1074;&#1086;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1074;&#1077;&#1082;&#1090;&#1086;&#1088;&#1085;&#1099;&#1084;&#1080; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;&#1084;&#1080;,
+&#1090;.&#1077;. &#1079;&#1072;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1103;&#1074;&#1085;&#1099;&#1081; &#1094;&#1080;&#1082;&#1083;
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, Nx):
+    u[i] <span style="color: #666666">=</span> u_n[i] <span style="color: #666666">+</span> F<span style="color: #666666">*</span>(u_n[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>u_n[i] <span style="color: #666666">+</span> u_n[i<span style="color: #666666">-1</span>])
+    <span style="color: #666666">+</span> tau<span style="color: #666666">*</span>f(x[i], t[n])
+</pre></div>
+<p>
+&#1072;&#1088;&#1080;&#1092;&#1084;&#1077;&#1090;&#1080;&#1082;&#1086;&#1081; &#1085;&#1072;&#1076; &#1089;&#1088;&#1077;&#1079;&#1072;&#1084;&#1080;
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>u[<span style="color: #666666">1</span>:Nx] <span style="color: #666666">=</span> u_n[<span style="color: #666666">1</span>:Nx] <span style="color: #666666">+</span> F<span style="color: #666666">*</span>(u_n[<span style="color: #666666">2</span>:Nx<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>u_n[<span style="color: #666666">1</span>:Nx] <span style="color: #666666">+</span> u[<span style="color: #666666">0</span>,Nx<span style="color: #666666">-1</span>])
+<span style="color: #666666">+</span> tau<span style="color: #666666">*</span>f(x[<span style="color: #666666">1</span>:Nx], t[n])
+</pre></div>
+<p>
+&#1080;&#1083;&#1080;
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> u_n[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> F<span style="color: #666666">*</span>(u_n[<span style="color: #666666">2</span>:] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>u_n[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> u[<span style="color: #666666">0</span>,<span style="color: #666666">-2</span>])
+<span style="color: #666666">+</span> tau<span style="color: #666666">*</span>f(x[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>], t[n])
+</pre></div>
+<p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+  <h3 class="panel-title">\( F \) &#8212; &#1082;&#1083;&#1102;&#1095;&#1077;&#1074;&#1086;&#1081; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; &#1087;&#1088;&#1080; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103;</h3>
+  </div>
+<div class="panel-body">
+<p> <!-- subsequent paragraphs come in larger fonts, so start with a paragraph -->
+&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; \( F \) &#8212;  &#1073;&#1077;&#1079;&#1088;&#1072;&#1079;&#1084;&#1077;&#1088;&#1085;&#1072;&#1103; &#1074;&#1077;&#1083;&#1080;&#1095;&#1080;&#1085;&#1072;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1072;&#1103; &#1086;&#1073;&#1098;&#1077;&#1076;&#1080;&#1085;&#1103;&#1077;&#1090; &#1092;&#1080;&#1079;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1081; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;
+&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;, \( a \), &#1080; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; \( h \) &#1080; \( \tau \). &#1057;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072; &#1103;&#1074;&#1085;&#1086;&#1081;
+&#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1099; &#1079;&#1072;&#1074;&#1080;&#1089;&#1103;&#1090; &#1086;&#1090; &#1074;&#1077;&#1083;&#1080;&#1095;&#1080;&#1085;&#1099; \( F \).
+</div>
+</div>
+
+
+<p>
+&#1060;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103; <code>solver_Ex</code> &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1091;&#1077;&#1090; &#1082;&#1072;&#1082; &#1089;&#1082;&#1072;&#1083;&#1103;&#1088;&#1085;&#1091;&#1102; &#1090;&#1072;&#1082; &#1080; &#1074;&#1077;&#1082;&#1090;&#1086;&#1088;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1085;&#1091;&#1102;
+&#1074;&#1077;&#1088;&#1089;&#1080;&#1080;. &#1050;&#1088;&#1086;&#1084;&#1077; &#1090;&#1086;&#1075;&#1086;, &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103; <code>solver_Ex</code> &#1080;&#1084;&#1077;&#1077;&#1090; &#1074; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102; &#1086;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;&#1075;&#1086;
+&#1074;&#1099;&#1079;&#1086;&#1074;&#1072; &#1090;&#1072;&#1082; &#1095;&#1090;&#1086; &#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100; &#1084;&#1086;&#1078;&#1077;&#1090; &#1086;&#1073;&#1088;&#1072;&#1073;&#1072;&#1090;&#1099;&#1074;&#1072;&#1090;&#1100; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1085;&#1072; &#1082;&#1072;&#1078;&#1076;&#1086;&#1084;
+&#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1084; &#1089;&#1083;&#1086;&#1077;. &#1060;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103; &#1086;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;&#1075;&#1086; &#1074;&#1099;&#1079;&#1086;&#1074;&#1072; &#1080;&#1084;&#1077;&#1077;&#1090; &#1074;&#1080;&#1076;
+<code>user_action(u, x, t, n)</code>, &#1075;&#1076;&#1077; <code>u</code> &#8212; &#1084;&#1072;&#1089;&#1089;&#1080;&#1074; &#1089; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;&#1084; &#1085;&#1072; <code>n</code>-&#1085;&#1086;&#1084;
+&#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1084; &#1089;&#1083;&#1086;&#1077;, <code>x</code> &#8212; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1072;&#1103; &#1089;&#1077;&#1090;&#1082;&#1072;, <code>t</code> &#8212; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1072;&#1103; &#1089;&#1077;&#1090;&#1082;&#1072;.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver_Ex</span>(I, a, f, L, tau, F, T, user_action<span style="color: #666666">=</span><span style="color: #008000">None</span>, version<span style="color: #666666">=</span><span style="color: #BA2121">&#39;scalar&#39;</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Векторизованная реализация явной схемы</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    cpu <span style="color: #666666">=</span> <span style="color: #666666">0</span>  <span style="color: #408080; font-style: italic"># Для подсчета процессорного времени</span>
+
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span><span style="color: #008000">float</span>(tau)))
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, Nt<span style="color: #666666">*</span>tau, Nt<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># сетка по времени</span>
+    h <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(a<span style="color: #666666">*</span>tau<span style="color: #666666">/</span>F)
+    Nx <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(L<span style="color: #666666">/</span><span style="color: #008000">float</span>(h)))
+    x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, Nx<span style="color: #666666">*</span>h, Nx<span style="color: #666666">+1</span>)    <span style="color: #408080; font-style: italic"># сетка по пространству</span>
+
+    <span style="color: #408080; font-style: italic"># Для уверенности шаги по пространству и времени согласуем с сетками</span>
+    h <span style="color: #666666">=</span> x[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> x[<span style="color: #666666">0</span>]
+    tau <span style="color: #666666">=</span> t[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> t[<span style="color: #666666">0</span>]
+
+    u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nx<span style="color: #666666">+1</span>)
+    u_n <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nx<span style="color: #666666">+1</span>)
+
+    <span style="color: #408080; font-style: italic"># устанавливаем начальные условия u(x,0) = I(x)</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nx<span style="color: #666666">+1</span>):
+        u_n[i] <span style="color: #666666">=</span> I(x[i])
+
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt<span style="color: #666666">+1</span>):
+        <span style="color: #408080; font-style: italic"># Вычисляем приближенное решение во внутренних узлах сетки</span>
+        <span style="color: #008000; font-weight: bold">if</span> version <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;scalar&#39;</span>:
+            <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, Nx):
+                u[i] <span style="color: #666666">=</span> u_n[i] <span style="color: #666666">+</span> F<span style="color: #666666">*</span>(u_n[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>u_n[i] <span style="color: #666666">+</span> u_n[i<span style="color: #666666">-1</span>]) <span style="color: #666666">+</span> tau<span style="color: #666666">*</span>f(x[i], t[n])
+        <span style="color: #008000; font-weight: bold">elif</span> version <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;vectorized&#39;</span>:
+            u[<span style="color: #666666">1</span>:Nx] <span style="color: #666666">=</span> u_n[<span style="color: #666666">1</span>:Nx] <span style="color: #666666">+</span> F<span style="color: #666666">*</span>(u_n[<span style="color: #666666">2</span>:Nx<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> <span style="color: #666666">2*</span>u_n[<span style="color: #666666">1</span>:Nx] <span style="color: #666666">+</span> u_n[<span style="color: #666666">0</span>:Nx<span style="color: #666666">-1</span>]) <span style="color: #666666">+</span> tau<span style="color: #666666">*</span>f(x[<span style="color: #666666">1</span>:Nx], t[n])
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;version = {}&#39;</span><span style="color: #666666">.</span>format(version))
+
+        <span style="color: #408080; font-style: italic"># Задаем граничные условия</span>
+        u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+        u[Nx] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+        <span style="color: #008000; font-weight: bold">if</span> user_action <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+            user_action(u, x, t, n)
+
+        <span style="color: #408080; font-style: italic"># Обновляем переменные перед следующим шагом</span>
+        u_n, u <span style="color: #666666">=</span> u, u_n
+
+    cpu <span style="color: #666666">=</span> time<span style="color: #666666">.</span>perf_counter()
+    <span style="color: #008000; font-weight: bold">return</span> u, x, t, cpu
+</pre></div>
+
+<h3 id="time-dep:num_parab:expl:verif" class="anchor">&#1042;&#1077;&#1088;&#1080;&#1092;&#1080;&#1082;&#1072;&#1094;&#1080;&#1103;</h3>
+
+<b>&#1058;&#1086;&#1095;&#1085;&#1086;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1085;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103;.</b>
+&#1055;&#1077;&#1088;&#1077;&#1076; &#1090;&#1077;&#1084; &#1082;&#1072;&#1082; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100;
+&#1088;&#1077;&#1096;&#1072;&#1090;&#1077;&#1083;&#1080;, &#1085;&#1072;&#1084; &#1085;&#1091;&#1078;&#1085;&#1086; &#1088;&#1072;&#1079;&#1088;&#1072;&#1073;&#1086;&#1090;&#1072;&#1090;&#1100; &#1087;&#1086;&#1076;&#1093;&#1086;&#1076;&#1103;&#1097;&#1080;&#1077; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074;&#1099;&#1077; &#1087;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099; &#1076;&#1083;&#1103;
+&#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1080; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; &#1072;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;&#1072;. &#1054;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103;, &#1095;&#1090;&#1086; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103;, &#1083;&#1080;&#1085;&#1077;&#1081;&#1085;&#1072;&#1103; &#1087;&#1086;
+&#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1080; &#1080; &#1082;&#1074;&#1072;&#1076;&#1088;&#1072;&#1090;&#1080;&#1095;&#1085;&#1072;&#1103; &#1087;&#1086; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1091;, &#1074; &#1090;&#1086;&#1095;&#1085;&#1086;&#1089;&#1090;&#1080; &#1091;&#1076;&#1086;&#1074;&#1083;&#1077;&#1090;&#1074;&#1086;&#1088;&#1103;&#1077;&#1090; &#1103;&#1074;&#1085;&#1086;&#1081;
+&#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1077;. &#1059;&#1095;&#1080;&#1090;&#1099;&#1074;&#1072;&#1103; &#1086;&#1076;&#1085;&#1086;&#1088;&#1086;&#1076;&#1085;&#1099;&#1077; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1077; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;, &#1084;&#1099; &#1084;&#1086;&#1078;&#1077;&#1084;
+&#1074;&#1086;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;&#1084;
+$$
+u(x,t) = 5tx(l-x).
+$$
+
+<p>
+&#1042;&#1086;&#1079;&#1100;&#1084;&#1077;&#1084; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1099;&#1081; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090; \( k(x) = \alpha \). &#1055;&#1086;&#1076;&#1089;&#1090;&#1072;&#1074;&#1083;&#1103;&#1103; &#1077;&#1075;&#1086; &#1074;
+&#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1077; <a href="#mjx-eqn-1">(1)</a>, &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1084; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102; &#1080;&#1089;&#1090;&#1086;&#1095;&#1085;&#1080;&#1082;&#1072;
+$$
+f(x,t) = 10 \alpha t + 5x(l-x)
+$$
+
+&#1051;&#1077;&#1075;&#1082;&#1086; &#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1080;&#1090;&#1100;, &#1095;&#1090;&#1086;, &#1077;&#1089;&#1083;&#1080; &#1087;&#1086;&#1076;&#1089;&#1090;&#1072;&#1074;&#1080;&#1090;&#1100; \( u(x,t) \) &#1080; \( f(x,t) \) &#1074; &#1103;&#1074;&#1085;&#1091;&#1102; &#1089;&#1093;&#1077;&#1084;&#1091;
+<a href="#mjx-eqn-8">(8)</a>, &#1090;&#1086; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1090;&#1089;&#1103; &#1090;&#1086;&#1078;&#1076;&#1077;&#1089;&#1090;&#1074;&#1086;.
+
+<p>
+&#1042;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1077; &#1087;&#1088;&#1072;&#1074;&#1086;&#1081; &#1095;&#1072;&#1089;&#1090;&#1080; &#1083;&#1077;&#1075;&#1082;&#1086; &#1072;&#1074;&#1090;&#1086;&#1084;&#1072;&#1090;&#1080;&#1079;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;, &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1103; <code>sympy</code>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+x, t, a, l <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;x t a l&#39;</span>)
+u <span style="color: #666666">=</span> x<span style="color: #666666">*</span>(l<span style="color: #666666">-</span>x)<span style="color: #666666">*5*</span>t
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pde</span>(u):
+    <span style="color: #008000; font-weight: bold">return</span> sp<span style="color: #666666">.</span>diff(u, t) <span style="color: #666666">-</span> a<span style="color: #666666">*</span>sp<span style="color: #666666">.</span>diff(u, x, x)
+
+f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>simplify(pde(u))
+</pre></div>
+<p>
+&#1048;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1103; &#1090;&#1072;&#1082;&#1086;&#1081; &#1087;&#1086;&#1076;&#1093;&#1086;&#1076;, &#1084;&#1086;&#1078;&#1085;&#1086; &#1074;&#1099;&#1073;&#1080;&#1088;&#1072;&#1090;&#1100; &#1083;&#1102;&#1073;&#1086;&#1077; &#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1080;&#1077; &#1076;&#1083;&#1103; <code>u</code> &#1080;
+&#1074; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1086;&#1075;&#1086; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; &#1072;&#1074;&#1090;&#1086;&#1084;&#1072;&#1090;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080; &#1087;&#1086;&#1083;&#1091;&#1095;&#1072;&#1090;&#1100; &#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1080;&#1077; &#1076;&#1083;&#1103;
+&#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1080;&#1089;&#1090;&#1086;&#1095;&#1085;&#1080;&#1082;&#1072;.
+
+<p>
+&#1044;&#1083;&#1103; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1081; &#1087;&#1088;&#1080; &#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1086;&#1084; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1080;, &#1090;&#1088;&#1077;&#1073;&#1091;&#1077;&#1090;&#1089;&#1103;,
+&#1095;&#1090;&#1086;&#1073;&#1099;  <code>u</code> &#1080; <code>f</code>  &#1073;&#1099;&#1083;&#1080; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103;&#1084;&#1080; Python. &#1053;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;, &#1090;&#1086;&#1095;&#1085;&#1086;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;
+&#1076;&#1086;&#1083;&#1078;&#1085;&#1086; &#1073;&#1099;&#1090;&#1100; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1077;&#1081; <code>u_exact(x, t)</code>, &#1072; &#1087;&#1088;&#1072;&#1074;&#1072;&#1103; &#1095;&#1072;&#1089;&#1090;&#1100; <code>f(x, t)</code>.
+&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099; <code>a</code> &#1080; <code>l</code> &#1074; &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1080; <code>u</code> &#1080; <code>f</code> &#1103;&#1074;&#1083;&#1103;&#1102;&#1090;&#1089;&#1103; &#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1072;&#1084;&#1080; &#1080;
+&#1076;&#1086;&#1083;&#1078;&#1085;&#1099; &#1073;&#1099;&#1090;&#1100; &#1079;&#1072;&#1084;&#1077;&#1085;&#1077;&#1085;&#1099; &#1085;&#1072; &#1086;&#1073;&#1098;&#1077;&#1082;&#1090;&#1099; &#1090;&#1080;&#1087;&#1072; <code>float</code> &#1074; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103;&#1093; Python. &#1069;&#1090;&#1086;
+&#1084;&#1086;&#1078;&#1085;&#1086; &#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100;, &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1103;&#1103; <code>a</code> &#1080; <code>l</code> &#1082;&#1072;&#1082; &#1095;&#1080;&#1089;&#1083;&#1072; &#1080; &#1087;&#1086;&#1076;&#1089;&#1090;&#1072;&#1074;&#1083;&#1103;&#1103; &#1080;&#1093; &#1074;&#1084;&#1077;&#1089;&#1090;&#1086;
+&#1089;&#1080;&#1084;&#1074;&#1086;&#1083;&#1086;&#1074;. &#1057;&#1086;&#1086;&#1090;&#1074;&#1077;&#1090;&#1089;&#1090;&#1074;&#1091;&#1102;&#1097;&#1080;&#1081; &#1082;&#1086;&#1076; &#1084;&#1086;&#1078;&#1077;&#1090; &#1074;&#1099;&#1075;&#1083;&#1103;&#1076;&#1077;&#1090;&#1100; &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1084; &#1086;&#1073;&#1088;&#1072;&#1079;&#1086;&#1084;:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+L <span style="color: #666666">=</span> <span style="color: #666666">1.5</span>
+u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([x, t], u<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;L&#39;</span>, L)<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;a&#39;</span>, a), modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+f <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([x, t], f<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;l&#39;</span>, l)<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;a&#39;</span>, a), modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+I <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: u_exact(x, <span style="color: #666666">0</span>)
+</pre></div>
+<p>
+&#1047;&#1076;&#1077;&#1089;&#1100; &#1084;&#1099; &#1090;&#1072;&#1082;&#1078;&#1077; &#1089;&#1086;&#1079;&#1076;&#1072;&#1083;&#1080; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102; &#1085;&#1072;&#1095;&#1072;&#1083;&#1100;&#1085;&#1099;&#1093; &#1076;&#1072;&#1085;&#1085;&#1099;&#1093; <code>I</code>.
+
+<p>
+&#1048;&#1076;&#1077;&#1103; &#1090;&#1077;&#1089;&#1090;&#1072; &#1079;&#1072;&#1082;&#1083;&#1102;&#1095;&#1072;&#1077;&#1090;&#1089;&#1103; &#1074; &#1090;&#1086;&#1084;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1085;&#1072;&#1096;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1090;&#1086;&#1095;&#1085;&#1086; (&#1089; &#1084;&#1072;&#1096;&#1080;&#1085;&#1085;&#1086;&#1081;
+&#1090;&#1086;&#1095;&#1085;&#1086;&#1089;&#1090;&#1100;&#1102;) &#1074;&#1086;&#1089;&#1087;&#1088;&#1086;&#1080;&#1079;&#1074;&#1086;&#1076;&#1080;&#1083;&#1086;&#1089;&#1100; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1085;&#1099;&#1084; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090;&#1085;&#1099;&#1084; &#1082;&#1086;&#1076;&#1086;&#1084;. &#1044;&#1083;&#1103; &#1101;&#1090;&#1080;&#1093;
+&#1094;&#1077;&#1083;&#1077;&#1081; &#1074; &#1092;&#1072;&#1081;&#1083;&#1077; <a href="src-time-dep/test_solver_ex.py" target="_self">test_solver_ex.py</a> &#1084;&#1099;
+&#1089;&#1086;&#1079;&#1076;&#1072;&#1076;&#1080;&#1084; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074;&#1099;&#1077; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1076;&#1083;&#1103; &#1089;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; &#1090;&#1086;&#1095;&#1085;&#1086;&#1075;&#1086; &#1080; &#1087;&#1088;&#1080;&#1073;&#1083;&#1080;&#1078;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086;
+&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1081; &#1074; &#1082;&#1086;&#1085;&#1094;&#1077; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1080;&#1085;&#1090;&#1077;&#1088;&#1074;&#1072;&#1083;&#1072;. &#1054;&#1076;&#1085;&#1091; &#1076;&#1083;&#1103; &#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103; &#1089;&#1082;&#1072;&#1083;&#1103;&#1088;&#1085;&#1086;&#1081; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080;:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_scalar</span>():
+    <span style="color: #408080; font-style: italic"># Определяем u_exact, f, I</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+    x, t, a, L <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;x t a L&#39;</span>)
+    u <span style="color: #666666">=</span> x<span style="color: #666666">*</span>(L<span style="color: #666666">-</span>x)<span style="color: #666666">*5*</span>t
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pde</span>(u):
+        <span style="color: #008000; font-weight: bold">return</span> sp<span style="color: #666666">.</span>diff(u, t) <span style="color: #666666">-</span> a<span style="color: #666666">*</span>sp<span style="color: #666666">.</span>diff(u, x, x)
+
+    f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>simplify(pde(u))
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    L <span style="color: #666666">=</span> <span style="color: #666666">1.5</span>
+
+    u_exact <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x, t], u<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;L&#39;</span>, L)<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;a&#39;</span>, a), modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+    f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x, t], f<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;L&#39;</span>, L)<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;a&#39;</span>, a), modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+    I <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: u_exact(x, <span style="color: #666666">0</span>)
+
+    h <span style="color: #666666">=</span> L<span style="color: #666666">/3.</span>
+    F <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    tau <span style="color: #666666">=</span> F<span style="color: #666666">*</span>h<span style="color: #666666">**2/</span>a
+
+    u, x, t, cpu <span style="color: #666666">=</span> solver_Ex(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, f<span style="color: #666666">=</span>f, L<span style="color: #666666">=</span>L, tau<span style="color: #666666">=</span>tau, F<span style="color: #666666">=</span>F, T<span style="color: #666666">=2</span>,
+                             user_action<span style="color: #666666">=</span><span style="color: #008000">None</span>, version<span style="color: #666666">=</span><span style="color: #BA2121">&#39;scalar&#39;</span>)
+    u_e <span style="color: #666666">=</span> u_exact(x, t[<span style="color: #666666">-1</span>])
+    diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Максимальная ошибка solver_Ex, scalar: {}&#39;</span><span style="color: #666666">.</span>format(diff)
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> tol, msg
+</pre></div>
+<p>
+&#1042;&#1090;&#1086;&#1088;&#1091;&#1102; &#1076;&#1083;&#1103; &#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103; &#1074;&#1077;&#1082;&#1090;&#1086;&#1088;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1085;&#1086;&#1081; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080;:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_vectorized</span>():
+    <span style="color: #408080; font-style: italic"># Определяем u_exact, f, I</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+    x, t, a, L <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;x t a L&#39;</span>)
+    u <span style="color: #666666">=</span> x<span style="color: #666666">*</span>(L<span style="color: #666666">-</span>x)<span style="color: #666666">*5*</span>t
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pde</span>(u):
+        <span style="color: #008000; font-weight: bold">return</span> sp<span style="color: #666666">.</span>diff(u, t) <span style="color: #666666">-</span> a<span style="color: #666666">*</span>sp<span style="color: #666666">.</span>diff(u, x, x)
+
+    f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>simplify(pde(u))
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    L <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+
+    u_exact <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x, t], u<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;L&#39;</span>, L)<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;a&#39;</span>, a), modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+    f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x, t], f<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;L&#39;</span>, L)<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;a&#39;</span>, a), modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+    I <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> x: u_exact(x, <span style="color: #666666">0</span>)
+
+    h <span style="color: #666666">=</span> L<span style="color: #666666">/10.</span>
+    F <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    tau <span style="color: #666666">=</span> F<span style="color: #666666">*</span>h<span style="color: #666666">**2/</span>a
+
+    u, x, t, cpu <span style="color: #666666">=</span> solver_Ex(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, f<span style="color: #666666">=</span>f, L<span style="color: #666666">=</span>L, tau<span style="color: #666666">=</span>tau, F<span style="color: #666666">=0.5</span>, T<span style="color: #666666">=2</span>,
+                             user_action<span style="color: #666666">=</span><span style="color: #008000">None</span>, version<span style="color: #666666">=</span><span style="color: #BA2121">&#39;vectorized&#39;</span>)
+    u_e <span style="color: #666666">=</span> u_exact(x, t[<span style="color: #666666">-1</span>])
+    diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Максимальная ошибка solver_Ex, vectorized: {}&#39;</span><span style="color: #666666">.</span>format(diff)
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> tol, msg
+</pre></div>
+<p>
+&#1044;&#1083;&#1103; &#1079;&#1072;&#1087;&#1091;&#1089;&#1082;&#1072; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074; &#1084;&#1086;&#1078;&#1085;&#1086; &#1074;&#1086;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1091;&#1090;&#1080;&#1083;&#1080;&#1090;&#1086;&#1081; <code>py.test</code>. &#1044;&#1083;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086;
+&#1074; &#1082;&#1072;&#1090;&#1072;&#1083;&#1086;&#1075;&#1077; &#1075;&#1076;&#1077; &#1089;&#1086;&#1073;&#1088;&#1072;&#1085;&#1099; &#1092;&#1072;&#1081;&#1083;&#1099; &#1089; &#1080;&#1084;&#1077;&#1085;&#1072;&#1084;&#1080; &#1085;&#1072;&#1095;&#1080;&#1085;&#1072;&#1102;&#1097;&#1080;&#1084;&#1080;&#1089;&#1103; &#1089; <code>test_</code>
+&#1076;&#1086;&#1089;&#1090;&#1072;&#1090;&#1086;&#1095;&#1085;&#1086; &#1079;&#1072;&#1087;&#1091;&#1089;&#1090;&#1080;&#1090;&#1100; &#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1091;
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>py.test -s -v
+</pre></div>
+<p>
+&#1042; &#1101;&#1090;&#1086;&#1084; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1073;&#1091;&#1076;&#1091;&#1090; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1077;&#1085;&#1099; &#1074;&#1089;&#1077; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1089; &#1080;&#1084;&#1077;&#1085;&#1072;&#1084;&#1080; &#1074;&#1080;&#1076;&#1072; <code>test_*()</code> &#1080;&#1079;
+&#1074;&#1089;&#1077;&#1093; &#1092;&#1072;&#1081;&#1083;&#1086;&#1074;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1090;&#1072;&#1082;&#1078;&#1077; &#1085;&#1072;&#1095;&#1080;&#1085;&#1072;&#1102;&#1090;&#1089;&#1103; &#1089; <code>test_</code>. &#1058;&#1077;&#1089;&#1090;&#1086;&#1074;&#1099;&#1077; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; (&#1080;&#1093;
+&#1080;&#1084;&#1077;&#1085;&#1072; &#1080;&#1084;&#1077;&#1102;&#1090; &#1074;&#1080;&#1076; <code>test_*()</code>, &#1084;&#1086;&#1078;&#1085;&#1086; &#1089;&#1086;&#1079;&#1076;&#1072;&#1074;&#1072;&#1090;&#1100; &#1074; &#1092;&#1072;&#1081;&#1083;&#1072;&#1093; &#1089; &#1083;&#1102;&#1073;&#1099;&#1084;&#1080;
+&#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;&#1084;&#1080;. &#1042; &#1101;&#1090;&#1086;&#1084; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1080;&#1083;&#1080; &#1077;&#1089;&#1083;&#1080; &#1084;&#1099; &#1093;&#1086;&#1090;&#1080;&#1084; &#1079;&#1072;&#1087;&#1091;&#1089;&#1090;&#1080;&#1090;&#1100; &#1090;&#1077;&#1089;&#1090;&#1099; &#1080;&#1079; &#1086;&#1076;&#1085;&#1086;&#1075;&#1086;
+&#1092;&#1072;&#1081;&#1083;&#1072;, &#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1072; &#1079;&#1072;&#1087;&#1091;&#1089;&#1082;&#1072; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074; &#1073;&#1091;&#1076;&#1077;&#1090; &#1074;&#1099;&#1075;&#1083;&#1103;&#1076;&#1077;&#1090;&#1100; &#1090;&#1072;&#1082;
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>py.test -s -v test_solver_ex.py
+</pre></div>
+<p>
+&#1042; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1091;&#1076;&#1072;&#1095;&#1085;&#1086;&#1075;&#1086; &#1087;&#1088;&#1086;&#1093;&#1086;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074; &#1074;&#1099;&#1074;&#1086;&#1076; &#1073;&#1091;&#1076;&#1077;&#1090; &#1087;&#1088;&#1080;&#1084;&#1077;&#1088;&#1085;&#1086; &#1090;&#1072;&#1082;&#1080;&#1084;
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>collected 2 items
+
+test_solver_ex.py::test_solver_Ex_scalar PASSED
+test_solver_ex.py::test_solver_Ex_vectorized PASSED
+</pre></div>
+<p>
+&#1042; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1087;&#1088;&#1086;&#1074;&#1072;&#1083;&#1072; &#1090;&#1077;&#1089;&#1090;&#1072; &#1073;&#1091;&#1076;&#1077;&#1090; &#1074;&#1099;&#1074;&#1077;&#1076;&#1077;&#1085;&#1086; &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077; &#1082;&#1086;&#1090;&#1086;&#1088;&#1086;&#1077; &#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1077;&#1090;&#1089;&#1103; &#1074;
+&#1082;&#1072;&#1095;&#1077;&#1089;&#1090;&#1074;&#1077; &#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1072; &#1082;&#1086;&#1084;&#1072;&#1085;&#1076;&#1099; <code>assert</code>.
+
+<p>
+<b>&#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072; &#1087;&#1086;&#1088;&#1103;&#1076;&#1082;&#1072; &#1089;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080;.</b>
+
+<p>
+&#1045;&#1089;&#1083;&#1080; &#1074;&#1099;&#1073;&#1088;&#1072;&#1085;&#1085;&#1086;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1085;&#1077; &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1090;&#1086;&#1095;&#1085;&#1099;&#1084; &#1076;&#1083;&#1103; &#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1099;, &#1084;&#1099;
+&#1084;&#1086;&#1078;&#1077;&#1084; &#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1080;&#1090;&#1100; &#1087;&#1086;&#1088;&#1103;&#1076;&#1086;&#1082; &#1089;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080;. &#1044;&#1083;&#1103; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103;
+&#1087;&#1086;&#1088;&#1103;&#1076;&#1082;&#1080; &#1089;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1087;&#1086; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1080; &#1080; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1091; &#1088;&#1072;&#1079;&#1085;&#1099;&#1077;. &#1044;&#1083;&#1103; &#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1086;&#1081;
+&#1087;&#1086;&#1075;&#1088;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1080; &#1074;&#1080;&#1076;&#1072;
+$$
+E = C_t \tau^r + C_x h^p
+$$
+
+&#1080;&#1084;&#1077;&#1077;&#1084; \( r=1 \), \( p = 2 \) (\( C_t \) &#1080; \( C_x \) &#8212; &#1085;&#1077;&#1080;&#1079;&#1074;&#1077;&#1089;&#1090;&#1085;&#1099;&#1077; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1099;&#1077;). &#1044;&#1083;&#1103;
+&#1091;&#1087;&#1088;&#1086;&#1097;&#1077;&#1085;&#1080;&#1103;, &#1074;&#1074;&#1077;&#1076;&#1077;&#1084; &#1086;&#1076;&#1080;&#1085; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; \( \delta \):
+$$
+\delta = \tau, \quad h = K \delta^{r/p},
+$$
+
+&#1075;&#1076;&#1077; \( K \) &#8212; &#1085;&#1077;&#1082;&#1086;&#1090;&#1086;&#1088;&#1072;&#1103; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1072;&#1103;. &#1069;&#1090;&#1086; &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1103;&#1077;&#1090; &#1085;&#1072;&#1084; &#1074;&#1099;&#1076;&#1077;&#1083;&#1080;&#1090;&#1100; &#1090;&#1086;&#1083;&#1100;&#1082;&#1086; &#1086;&#1076;&#1080;&#1085;
+&#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080;
+$$
+E = C_t \delta^r + C_x(K\delta^{r/p})^p = \tilde{C} \delta^r, \quad
+\tilde{C} = C_t + C_xK^p.
+$$
+
+&#1042; &#1085;&#1072;&#1096;&#1077;&#1084; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; \( r=1 \).
+
+<p>
+&#1048;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1103; &#1090;&#1086;&#1095;&#1085;&#1086;&#1077; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1076;&#1080;&#1092;&#1092;&#1077;&#1088;&#1077;&#1085;&#1094;&#1080;&#1072;&#1083;&#1100;&#1085;&#1086;&#1081; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080;, &#1084;&#1099; &#1074;&#1099;&#1095;&#1080;&#1089;&#1083;&#1080;&#1084; &#1087;&#1086;&#1075;&#1088;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1100;
+\( E \) &#1085;&#1072; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1080; &#1091;&#1090;&#1086;&#1095;&#1085;&#1077;&#1085;&#1085;&#1099;&#1093; &#1089;&#1077;&#1090;&#1086;&#1082; &#1080; &#1087;&#1086;&#1089;&#1084;&#1086;&#1090;&#1088;&#1080;&#1084;, &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1103;&#1077;&#1090;&#1089;&#1103; &#1083;&#1080;
+\( r = 1 \). &#1052;&#1099; &#1085;&#1077; &#1073;&#1091;&#1076;&#1077;&#1084; &#1086;&#1094;&#1077;&#1085;&#1080;&#1074;&#1072;&#1090;&#1100; &#1082;&#1086;&#1085;&#1089;&#1090;&#1072;&#1085;&#1090;&#1099; \( C_t \) &#1080; \( C_x \), &#1090;&#1072;&#1082; &#1082;&#1072;&#1082; &#1085;&#1072;&#1089; &#1085;&#1077;
+&#1080;&#1085;&#1090;&#1077;&#1088;&#1077;&#1089;&#1091;&#1102;&#1090; &#1080;&#1093; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103;.
+
+<p>
+&#1042; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1087;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1085;&#1086;&#1075;&#1086; &#1082;&#1086;&#1101;&#1092;&#1092;&#1080;&#1094;&#1080;&#1077;&#1085;&#1090;&#1072; \( k(x) = \alpha \) &#1076;&#1083;&#1103; &#1074;&#1099;&#1073;&#1086;&#1088;&#1072; \( K \)
+&#1074;&#1086;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1077;&#1084;&#1089;&#1103; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1077;&#1084; &#1091;&#1089;&#1090;&#1086;&#1081;&#1095;&#1080;&#1074;&#1086;&#1089;&#1090;&#1080; &#1103;&#1074;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1099;:
+$$
+\frac{\alpha \tau}{h^2} \leq \frac{1}{2} \Rightarrow h \geq
+\sqrt{2\alpha} \delta^{1/2}
+$$
+
+&#1055;&#1086;&#1101;&#1090;&#1086;&#1084;&#1091;, &#1074;&#1099;&#1073;&#1080;&#1088;&#1072;&#1103; \( K = \sqrt{2\alpha} \), &#1084;&#1099; &#1086;&#1073;&#1077;&#1089;&#1087;&#1077;&#1095;&#1080;&#1084; &#1074; &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;&#1077; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1077;&#1085;&#1080;&#1077;
+&#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103; &#1091;&#1089;&#1090;&#1086;&#1081;&#1095;&#1080;&#1074;&#1086;&#1089;&#1090;&#1080;.
+
+<p>
+&#1044;&#1072;&#1083;&#1077;&#1077; &#1076;&#1083;&#1103; &#1086;&#1094;&#1077;&#1085;&#1082;&#1080; &#1087;&#1086;&#1088;&#1103;&#1076;&#1082;&#1072; &#1089;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1085;&#1072;&#1084; &#1085;&#1091;&#1078;&#1085;&#1086; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1100; &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1077;
+&#1096;&#1072;&#1075;&#1080;.
+
+<p>
+1. &#1042;&#1099;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;&#1075;&#1088;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1077;&#1081; &#1085;&#1072; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1080; &#1089;&#1077;&#1090;&#1086;&#1082;. &#1044;&#1083;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086;
+&#1079;&#1072;&#1076;&#1072;&#1076;&#1080;&#1084; &#1085;&#1072;&#1095;&#1072;&#1083;&#1100;&#1085;&#1099;&#1081; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; \( \delta_0 \), &#1080; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1080;&#1084;
+&#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090; &#1091;&#1084;&#1077;&#1085;&#1100;&#1096;&#1072;&#1103; \( \delta \): \( \delta_k = 2^k \delta_0 \), \( k=0, 1, \ldots, m \).
+&#1044;&#1083;&#1103; &#1082;&#1072;&#1078;&#1076;&#1086;&#1075;&#1086; &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;&#1072; &#1084;&#1099; &#1076;&#1086;&#1083;&#1078;&#1085;&#1099; &#1089;&#1086;&#1093;&#1088;&#1072;&#1085;&#1103;&#1090;&#1100; \( E \) &#1080; \( \delta \). &#1057;&#1090;&#1072;&#1085;&#1076;&#1072;&#1088;&#1090;&#1085;&#1086;
+&#1076;&#1083;&#1103; &#1086;&#1094;&#1077;&#1085;&#1082;&#1080; &#1087;&#1086;&#1075;&#1088;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1080; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1102;&#1090;&#1089;&#1103; &#1085;&#1086;&#1088;&#1084;&#1099; &#1089;&#1077;&#1090;&#1086;&#1095;&#1085;&#1099;&#1093; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1081;:
+$$
+\begin{align}
+\tag{12}
+E &= \| e^n \|_2 = \left( \sum_{n=0}^{N_t} \sum_{i=0}^{N_x} (e_i^n)^2 h\tau,
+\right)^{1/2}, \quad e_i^n = u_{\rm{e}}(x_i, t_n) - y_i^n,\\ 
+\tag{13}
+E &= \| e^n \|_\infty = \max_{i, n} |e_i^n|.
+\end{align}
+$$
+
+<p>
+&#1052;&#1086;&#1078;&#1085;&#1086; &#1090;&#1072;&#1082;&#1078;&#1077; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100; &#1085;&#1086;&#1088;&#1084;&#1091; &#1085;&#1072; &#1086;&#1076;&#1085;&#1086;&#1084; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1084; &#1096;&#1072;&#1075;&#1077;, &#1085;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088;, &#1074;
+&#1082;&#1086;&#1085;&#1077;&#1095;&#1085;&#1099;&#1081; &#1084;&#1086;&#1084;&#1077;&#1085;&#1090; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1080; \( T \) (\( n = N_t \)):
+$$
+\begin{align}
+\tag{14}
+E &= \| e^n \|_2 = \left( \sum_{i=0}^{N_x} (e_i^n)^2 h \right)^{1/2},\\ 
+E &= \| e^n \|_\infty = \max_{0 \leq i \leq N_xi} | e_i^n |.
+\tag{15}
+\end{align}
+$$
+
+<p>
+2. &#1055;&#1091;&#1089;&#1090;&#1100; \( E_k \) &#8212; &#1087;&#1086;&#1075;&#1088;&#1077;&#1096;&#1085;&#1086;&#1089;&#1090;&#1100;, &#1087;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1085;&#1072;&#1103; &#1085;&#1072; &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;&#1077; &#1089; &#1085;&#1086;&#1084;&#1077;&#1088;&#1086;&#1084;
+\( k \), &#1072; \( \delta_k \) &#8212; &#1089;&#1086;&#1086;&#1090;&#1074;&#1077;&#1090;&#1089;&#1090;&#1074;&#1091;&#1102;&#1097;&#1080;&#1081; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088; &#1076;&#1080;&#1089;&#1082;&#1088;&#1077;&#1090;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080;. &#1055;&#1086;&#1083;&#1086;&#1078;&#1080;&#1074;
+\( E_k = D \delta_k^r \), &#1084;&#1099; &#1084;&#1086;&#1078;&#1077;&#1084; &#1086;&#1094;&#1077;&#1085;&#1080;&#1090;&#1100; \( r \) &#1089;&#1088;&#1072;&#1074;&#1085;&#1080;&#1074;&#1072;&#1103; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1099;&#1077;
+&#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;&#1099;:
+$$
+\begin{align*}
+E_{k+1} &= D \delta_{k+1}^r,\\ 
+E_k &= D \delta_k^r.
+\end{align*}
+$$
+
+&#1054;&#1090;&#1089;&#1102;&#1076;&#1072; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1084;
+$$
+r = \frac{\ln(E_{k+1}/E_{k})}{\ln (\delta_{k+1}/\delta_{k})}.
+$$
+
+<p>
+&#1058;&#1072;&#1082; &#1082;&#1072;&#1082; \( r \) &#1079;&#1072;&#1074;&#1080;&#1089;&#1080;&#1090; &#1086;&#1090; \( k \) &#1076;&#1086;&#1073;&#1072;&#1074;&#1080;&#1084; &#1080;&#1085;&#1076;&#1077;&#1082;&#1089; &#1082; \( r \): \( r_k \), &#1075;&#1076;&#1077; \( k = 0, 1, \ldots, m-2 \),
+&#1077;&#1089;&#1083;&#1080; &#1087;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1086; \( m \) &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;&#1086;&#1074;: \( (\delta_0, E_0) \), \( (\delta_1,
+E_1) \), \( \ldots \), \( (\delta_{m-1}, E_{m-1}) \).
+
+<p>
+&#1042; &#1085;&#1072;&#1096;&#1077;&#1081; &#1088;&#1072;&#1089;&#1089;&#1084;&#1072;&#1090;&#1088;&#1080;&#1074;&#1072;&#1077;&#1084;&#1086;&#1081; &#1072;&#1087;&#1087;&#1088;&#1086;&#1082;&#1089;&#1080;&#1084;&#1072;&#1094;&#1080;&#1080; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; \( r=1 \)
+&#1080; &#1086;&#1090;&#1089;&#1102;&#1076;&#1072; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103; \( r_i \) &#1076;&#1086;&#1083;&#1078;&#1085;&#1099; &#1089;&#1090;&#1088;&#1077;&#1084;&#1080;&#1090;&#1100;&#1089;&#1103; &#1082; \( 1 \) &#1089; &#1088;&#1086;&#1089;&#1090;&#1086;&#1084; \( k \).
+
+<h2 id="time-dep:num_parab:exp" class="anchor">&#1063;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1099;&#1081; &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;</h2>
+
+<p>
+&#1045;&#1089;&#1083;&#1080; &#1087;&#1088;&#1077;&#1076;&#1089;&#1090;&#1072;&#1074;&#1083;&#1077;&#1085;&#1085;&#1099;&#1077; &#1074;&#1099;&#1096;&#1077; &#1090;&#1077;&#1089;&#1090;&#1086;&#1074;&#1099;&#1077; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1103;&#1102;&#1090;&#1089;&#1103; &#1073;&#1077;&#1079; &#1086;&#1096;&#1080;&#1073;&#1086;&#1082;, &#1084;&#1099;
+&#1080;&#1084;&#1077;&#1077;&#1084; &#1086;&#1089;&#1085;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103; &#1087;&#1088;&#1077;&#1076;&#1087;&#1086;&#1083;&#1072;&#1075;&#1072;&#1090;&#1100;, &#1095;&#1090;&#1086; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103; &#1085;&#1072;&#1096;&#1077;&#1075;&#1086; &#1072;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;&#1072;
+&#1074;&#1077;&#1088;&#1085;&#1072;&#1103;. &#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1081; &#1096;&#1072;&#1075; &#8212; &#1087;&#1088;&#1086;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1077; &#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1101;&#1082;&#1089;&#1087;&#1077;&#1088;&#1080;&#1084;&#1077;&#1085;&#1090;&#1072;.
+
+<p>
+&#1056;&#1072;&#1089;&#1089;&#1084;&#1086;&#1090;&#1088;&#1080;&#1084; &#1079;&#1072;&#1076;&#1072;&#1095;&#1091;, &#1075;&#1076;&#1077; \( x/L \) &#8212; &#1085;&#1086;&#1074;&#1072;&#1103; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1072;&#1103; &#1087;&#1077;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1072;&#1103;, &#1072;
+\( at/L^2 \) &#8212; &#1085;&#1086;&#1074;&#1072;&#1103; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1072;&#1103; &#1087;&#1077;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1072;&#1103;. &#1055;&#1088;&#1072;&#1074;&#1072;&#1103; &#1095;&#1072;&#1089;&#1090;&#1100; (&#1080;&#1089;&#1090;&#1086;&#1095;&#1085;&#1080;&#1082;) \( f \)
+&#1086;&#1090;&#1089;&#1091;&#1090;&#1089;&#1090;&#1074;&#1091;&#1077;&#1090;, &#1072; \( u \) &#1086;&#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1077;&#1085;&#1072; &#1074;&#1077;&#1083;&#1080;&#1095;&#1080;&#1085;&#1086;&#1081; \( \max_{x\in[0,L]} |I(x)| \). &#1042;
+&#1101;&#1090;&#1086;&#1084; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1077; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1077; &#1087;&#1088;&#1080;&#1085;&#1080;&#1084;&#1072;&#1077;&#1090; &#1074;&#1080;&#1076;
+$$
+\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}
+$$
+
+&#1085;&#1072; &#1086;&#1090;&#1088;&#1077;&#1079;&#1082;&#1077; \( [0, 1] \) &#1089; &#1075;&#1088;&#1072;&#1085;&#1080;&#1095;&#1085;&#1099;&#1084;&#1080; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;&#1084;&#1080; \( u(0) = 0 \) &#1080; \( u(1) =
+0 \). &#1055;&#1088;&#1086;&#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1091;&#1077;&#1084; &#1076;&#1074;&#1072; &#1085;&#1072;&#1095;&#1072;&#1083;&#1100;&#1085;&#1099;&#1093; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;: &#1088;&#1072;&#1079;&#1088;&#1099;&#1074;&#1085;&#1091;&#1102; &#1087;&#1083;&#1086;&#1097;&#1072;&#1076;&#1082;&#1091;
+$$
+I(x) = \begin{cases}
+0, & |x - L/2| > 0.1 \\ 
+1, & |x - L/2| \leq 0.1
+\end{cases}
+$$
+
+&#1080; &#1075;&#1083;&#1072;&#1076;&#1082;&#1091;&#1102; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102; &#1043;&#1072;&#1091;&#1089;&#1089;&#1072;
+$$
+I(x) = e^{-\frac{1}{2\sigma^2}(x - L/2)^2}
+$$
+
+<p>
+&#1060;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; <code>plug</code> &#1080; <code>gaussian</code> &#1074; &#1092;&#1072;&#1081;&#1083;&#1077; <a href="src-time-dep/parab1d.py" target="_self">parab1d.py</a> &#1079;&#1072;&#1087;&#1091;&#1089;&#1082;&#1072;&#1102;&#1090; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; &#1076;&#1074;&#1091;&#1093; &#1089;&#1086;&#1086;&#1090;&#1074;&#1077;&#1090;&#1089;&#1090;&#1074;&#1091;&#1102;&#1097;&#1080;&#1093;
+&#1079;&#1072;&#1076;&#1072;&#1095;:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plug</span>(scheme<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Ex&#39;</span>, F<span style="color: #666666">=0.5</span>, Nx<span style="color: #666666">=50</span>):
+    L <span style="color: #666666">=</span> <span style="color: #666666">1.</span>
+    a <span style="color: #666666">=</span> <span style="color: #666666">1.</span>
+    T <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+    <span style="color: #408080; font-style: italic"># Вычисляем tau по Nx и F</span>
+    h <span style="color: #666666">=</span> L<span style="color: #666666">/</span>Nx
+    tau <span style="color: #666666">=</span> F<span style="color: #666666">*</span>h<span style="color: #666666">**2/</span>a
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">I</span>(x):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">abs</span>(x <span style="color: #666666">-</span> L<span style="color: #666666">/2</span>) <span style="color: #666666">&gt;</span> <span style="color: #666666">0.1</span>:
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1.</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, t):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.0</span>
+   
+    cpu <span style="color: #666666">=</span> viz(I, a, f, L, tau, F, T,
+              u_min<span style="color: #666666">=-0.1</span>, u_max<span style="color: #666666">=1.1</span>,
+              scheme<span style="color: #666666">=</span>scheme, animate<span style="color: #666666">=</span><span style="color: #008000">True</span>,
+              framefiles<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Время расчета: {}&#39;</span><span style="color: #666666">.</span>format(cpu))
+<span style="color: #408080; font-style: italic"># End plug</span>
+<span style="color: #408080; font-style: italic"># Start gaussian</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gaussian</span>(scheme<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Ex&#39;</span>, F<span style="color: #666666">=0.5</span>, Nx<span style="color: #666666">=50</span>, sigma<span style="color: #666666">=0.05</span>):
+    L <span style="color: #666666">=</span> <span style="color: #666666">1.</span>
+    a <span style="color: #666666">=</span> <span style="color: #666666">1.</span>
+    T <span style="color: #666666">=</span> <span style="color: #666666">0.01</span>
+    <span style="color: #408080; font-style: italic"># Вычисляем tau по Nx и F</span>
+    h <span style="color: #666666">=</span> L<span style="color: #666666">/</span>Nx
+    tau <span style="color: #666666">=</span> F<span style="color: #666666">*</span>h<span style="color: #666666">**2/</span>a
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">I</span>(x):
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-0.5*</span>((x <span style="color: #666666">-</span> L<span style="color: #666666">/2</span>)<span style="color: #666666">**2</span>)<span style="color: #666666">/</span>(sigma<span style="color: #666666">**2</span>))
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, t):
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>zeros_like(x)
+
+    cpu <span style="color: #666666">=</span> viz(I, a, f, L, tau, F, T,
+              u_min<span style="color: #666666">=-0.1</span>, u_max<span style="color: #666666">=1.1</span>,
+              scheme<span style="color: #666666">=</span>scheme, animate<span style="color: #666666">=</span><span style="color: #008000">True</span>,
+              framefiles<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Время расчета: {}&#39;</span><span style="color: #666666">.</span>format(cpu))
+</pre></div>
+<p>
+&#1069;&#1090;&#1080; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1102;&#1090; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1102; <code>viz</code> &#1076;&#1083;&#1103; &#1079;&#1072;&#1087;&#1091;&#1089;&#1082;&#1072; &#1089;&#1086;&#1083;&#1074;&#1077;&#1088;&#1072; &#1080;
+&#1074;&#1080;&#1079;&#1091;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1080; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103; &#1087;&#1086;&#1089;&#1088;&#1077;&#1076;&#1089;&#1090;&#1074;&#1086;&#1084; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1086;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;&#1075;&#1086;
+&#1074;&#1099;&#1079;&#1086;&#1074;&#1072; &#1076;&#1083;&#1103; &#1088;&#1080;&#1089;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">viz</span>(I, a, f, L, tau, F, T, u_min, u_max,
+        scheme<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Ex&#39;</span>, animate<span style="color: #666666">=</span><span style="color: #008000">True</span>, framefiles<span style="color: #666666">=</span><span style="color: #008000">True</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_u</span>(u, x, t, n):
+        plt<span style="color: #666666">.</span>clf()
+        plt<span style="color: #666666">.</span>plot(x, u, <span style="color: #BA2121">&#39;r-&#39;</span>)
+        plt<span style="color: #666666">.</span>axis([<span style="color: #666666">0.</span>, L, u_min, u_max])
+        plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;$t=${}&#39;</span><span style="color: #666666">.</span>format(t[n]))
+        <span style="color: #008000; font-weight: bold">if</span> framefiles:
+            plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp_frame{:04d}.png&#39;</span><span style="color: #666666">.</span>format(n))
+            plt<span style="color: #666666">.</span>close()
+            
+    user_action <span style="color: #666666">=</span> plot_u <span style="color: #008000; font-weight: bold">if</span> animate <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">lambda</span> u, x, t, n: <span style="color: #008000">None</span>
+    u, x, t, cpu <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(<span style="color: #BA2121">&#39;solver_&#39;</span><span style="color: #666666">+</span>scheme)(I, a, f, L, tau, F, T,
+                                          user_action<span style="color: #666666">=</span>user_action)
+    <span style="color: #008000; font-weight: bold">return</span> cpu
+</pre></div>
+<p>
+&#1054;&#1090;&#1084;&#1077;&#1090;&#1080;&#1084;, &#1095;&#1090;&#1086; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103; <code>viz</code> &#1087;&#1086;&#1089;&#1088;&#1077;&#1076;&#1089;&#1090;&#1074;&#1086;&#1084; &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1080; &#1086;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086;&#1075;&#1086; &#1074;&#1099;&#1079;&#1086;&#1074;&#1072; &#1090;&#1072;&#1082;&#1078;&#1077;
+&#1084;&#1086;&#1078;&#1077;&#1090; &#1089;&#1086;&#1093;&#1088;&#1072;&#1085;&#1103;&#1090;&#1100; &#1075;&#1088;&#1072;&#1092;&#1080;&#1082;&#1080; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1081; &#1085;&#1072; &#1082;&#1072;&#1078;&#1076;&#1086;&#1084; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1085;&#1086;&#1084; &#1089;&#1083;&#1086;&#1077; &#1074; &#1092;&#1072;&#1081;&#1083;&#1099;
+&#1092;&#1086;&#1088;&#1084;&#1072;&#1090;&#1072; <code>png</code>. &#1069;&#1090;&#1080; &#1092;&#1072;&#1081;&#1083;&#1099; &#1084;&#1086;&#1078;&#1085;&#1086; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1100; &#1076;&#1083;&#1103; &#1075;&#1077;&#1085;&#1077;&#1088;&#1072;&#1094;&#1080;&#1080; &#1074;&#1080;&#1076;&#1077;&#1086;
+&#1092;&#1072;&#1081;&#1083;&#1086;&#1074;.
+
+<p>
+<!-- Local Variables: -->
+<!-- doconce-chapter-nickname: "time-dep" -->
+<!-- doconce-section-nickname: "num_parab" -->
+<!-- End: -->
+
+<h1 id="time-dep:tasks" class="anchor">&#1047;&#1072;&#1076;&#1072;&#1095;&#1080;</h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="time-dep:tasks:1" class="anchor">Задача 1: &#1047;&#1072;&#1076;&#1072;&#1095;&#1072; &#1090;&#1088;&#1077;&#1090;&#1100;&#1077;&#1075;&#1086; &#1088;&#1086;&#1076;&#1072;</h2>
+
+<p>
+&#1053;&#1072;&#1087;&#1080;&#1089;&#1072;&#1090;&#1100; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1091; &#1076;&#1083;&#1103; &#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103; &#1082;&#1088;&#1072;&#1077;&#1074;&#1086;&#1081; &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; &#1076;&#1083;&#1103;
+&#1086;&#1076;&#1085;&#1086;&#1084;&#1077;&#1088;&#1085;&#1086;&#1075;&#1086; &#1087;&#1072;&#1088;&#1072;&#1073;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1075;&#1086; &#1091;&#1088;&#1072;&#1074;&#1085;&#1077;&#1085;&#1080;&#1103; &#1089; &#1082;&#1088;&#1072;&#1077;&#1074;&#1099;&#1084;&#1080; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;&#1084;&#1080; &#1090;&#1088;&#1077;&#1090;&#1100;&#1077;&#1075;&#1086;
+&#1088;&#1086;&#1076;&#1072;:
+$$
+\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} +
+f(x,t), \quad 0 < x < l, \ 0 < t \leq T,
+$$
+
+$$
+-\frac{\partial u}{\partial x}(0, t) + \sigma_1(t) u(0, t) = \mu_1(t),
+\quad  \frac{\partial u}{\partial x}(l, t) + \sigma_2(t) u(l, t) =
+\mu_2(t), \ 0 < t \leq T,
+$$
+
+$$
+u(x, 0) = I(x), \quad 0 \leq x \leq l.
+$$
+
+&#1085;&#1072; &#1088;&#1072;&#1074;&#1085;&#1086;&#1084;&#1077;&#1088;&#1085;&#1086;&#1081; &#1087;&#1086; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1091; &#1080; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1080; &#1089;&#1077;&#1090;&#1082;&#1077; &#1087;&#1088;&#1080; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1085;&#1080;&#1080; &#1103;&#1074;&#1085;&#1086;&#1081;
+&#1088;&#1072;&#1079;&#1085;&#1086;&#1089;&#1090;&#1085;&#1086;&#1081; &#1089;&#1093;&#1077;&#1084;&#1099;. &#1055;&#1088;&#1086;&#1090;&#1077;&#1089;&#1090;&#1080;&#1088;&#1091;&#1081;&#1090;&#1077; &#1089;&#1082;&#1086;&#1088;&#1086;&#1089;&#1090;&#1100; &#1089;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1088;&#1077;&#1072;&#1083;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1085;&#1086;&#1075;&#1086;
+&#1084;&#1077;&#1090;&#1086;&#1076;&#1072; &#1087;&#1088;&#1080; \( l = 1 \), \( \sigma_1 = \sigma_2 = 0, 10, 100 \) &#1085;&#1072; &#1090;&#1086;&#1095;&#1085;&#1086;&#1084;
+&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1080;
+$$
+u(x, t) = \sin t (1 + 2x - 3x^2).
+$$
+
+<p>
+<!-- Local Variables: -->
+<!-- doconce-chapter-nickname: "time-dep" -->
+<!-- doconce-section-nickname: "tasks" -->
+<!-- End: -->
+
+<p>
+<!-- Local Variables: -->
+<!-- doconce-chapter-nickname: "time-dep" -->
+<!-- End: -->
+<!-- --- end exercise --- -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="previous">
+    <a href="._time-dep-journal000.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
