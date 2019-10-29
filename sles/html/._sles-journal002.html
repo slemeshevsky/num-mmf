@@ -335,21 +335,20 @@ $$
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ld</span>(A):
-	<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">	Для симметричной матрицы A вычисляет нижнюю треугольную </span>
-<span style="color: #BA2121; font-style: italic">	матрицу L и диагональную матрицу D, такие </span>
-<span style="color: #BA2121; font-style: italic">	что A = LDL^T. Элементы a_{ij} замещаются	на l_{ij}, если i &gt; j, </span>
-<span style="color: #BA2121; font-style: italic">	и на d_i, если i = j</span>
-<span style="color: #BA2121; font-style: italic">	&quot;&quot;&quot;</span>
-
-	n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(A)
-	LD <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(A, <span style="color: #008000">float</span>)
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Для симметричной матрицы A вычисляет нижнюю треугольную</span>
+<span style="color: #BA2121; font-style: italic">    матрицу L и диагональную матрицу D, такие</span>
+<span style="color: #BA2121; font-style: italic">    что A = LDL^T. Элементы a_{ij} замещаются</span>
+<span style="color: #BA2121; font-style: italic">    на l_{ij}, если i &gt; j, 	и на d_i, если i = j</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(A)
+LD <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(A, <span style="color: #008000">float</span>)
 	<span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
 		v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(j<span style="color: #666666">+1</span>)
-		v[:j] <span style="color: #666666">=</span> LD[j,:j]<span style="color: #666666">*</span>LD[<span style="color: #008000">range</span>(j),<span style="color: #008000">range</span>(j)]
-		v[j] <span style="color: #666666">=</span> LD[j,j] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[j,:j],v[:j])
-		LD[j,j] <span style="color: #666666">=</span> v[j]
-		LD[j<span style="color: #666666">+1</span>:,j] <span style="color: #666666">=</span> (LD[j<span style="color: #666666">+1</span>:,j] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[j<span style="color: #666666">+1</span>:,:j],v[:j]))<span style="color: #666666">/</span>v[j]
+		v[:j] <span style="color: #666666">=</span> LD[j, :j]<span style="color: #666666">*</span>LD[<span style="color: #008000">range</span>(j), <span style="color: #008000">range</span>(j)]
+		v[j] <span style="color: #666666">=</span> LD[j, j] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[j, :j], v[:j])
+		LD[j, j] <span style="color: #666666">=</span> v[j]
+		LD[j<span style="color: #666666">+1</span>:, j] <span style="color: #666666">=</span> (LD[j<span style="color: #666666">+1</span>:, j] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[j<span style="color: #666666">+1</span>:, :j], v[:j]))<span style="color: #666666">/</span>v[j]
 
 	<span style="color: #008000; font-weight: bold">return</span> LD
 </pre></div>
@@ -400,12 +399,12 @@ $$
 <span style="color: #BA2121; font-style: italic">	Решает систему Ax = b c использованием LDL^T-разложения</span>
 <span style="color: #BA2121; font-style: italic">	&quot;&quot;&quot;</span>
 	LD <span style="color: #666666">=</span> ld(A)
-	b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(b,<span style="color: #008000">float</span>)
+	b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array(b, <span style="color: #008000">float</span>)
 	<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(b)):
-		b[i] <span style="color: #666666">=</span> b[i] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[i,:i],b[:i])
-	b[:] <span style="color: #666666">=</span> b[:]<span style="color: #666666">/</span>LD[<span style="color: #008000">range</span>(<span style="color: #008000">len</span>(b)),<span style="color: #008000">range</span>(<span style="color: #008000">len</span>(b))]
+		b[i] <span style="color: #666666">=</span> b[i] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[i, :i], b[:i])
+	b[:] <span style="color: #666666">=</span> b[:]<span style="color: #666666">/</span>LD[<span style="color: #008000">range</span>(<span style="color: #008000">len</span>(b)), <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(b))]
 	<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(b)<span style="color: #666666">-1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">-1</span>):
-		b[i] <span style="color: #666666">=</span> (b[i] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[i<span style="color: #666666">+1</span>:,i],b[i<span style="color: #666666">+1</span>:]))
+		b[i] <span style="color: #666666">=</span> (b[i] <span style="color: #666666">-</span> np<span style="color: #666666">.</span>dot(LD[i<span style="color: #666666">+1</span>:, i], b[i<span style="color: #666666">+1</span>:]))
 	<span style="color: #008000; font-weight: bold">return</span> b
 </pre></div>
 

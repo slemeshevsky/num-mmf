@@ -32,6 +32,7 @@ def gauss_piv(A):
 
 def solve(A, b):
     p = gauss_piv(A)
+    print("LU с перестановками {}".format(A))
     piv_vec(p, b)
     for i in range(1, len(b)):
         b[i] = b[i] - np.dot(A[i, :i], b[:i])
